@@ -39,12 +39,14 @@ public class FXMLController implements Initializable {
     public JFXPasswordField password;
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
+
     Connection connection = null;
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
-    public FXMLController() throws SQLException {
-        connection = DBConnect.Connection();
+    public FXMLController() throws SQLException, ClassNotFoundException {
+        final String dburl = "jdbc:derby:Bank;create=true; user=root;password=root";
+        Class.forName("org.apache.derby.jdbc.EmbaddedDriver");
     }
 
     /* REQUESTING FOCUS OF KEYBOARD AND MOUSE OVER TEXTFIELD */
