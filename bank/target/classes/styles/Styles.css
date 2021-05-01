@@ -1,0 +1,52 @@
+/* #pane {
+    -fx-background-color: red;
+  -fx-background-color: linear-gradient(red, orange);
+    -fx-background-color: linear-gradient(to bottom,#409fde,#dd2992);
+} */
+
+.color {
+  -fx-text-fill: red;
+}
+
+.table-view .column-header-background {
+  -fx-background-color: #00c4f044;
+  -fx-border-radius: 30px;
+}
+
+.table-view .column-header {
+  -fx-background-color: transparent;
+}
+
+/* .table-view .table-cell {
+  -fx-border-color: transparent;
+} */
+
+.table-row-cell:hover {
+  -fx-background-color: #93f9b911;
+  -fx-text-background-color: red;
+}
+
+.table-row-cell:odd {
+  -fx-background-color: #93f9b911;
+}
+
+.table-row-cell:even {
+  -fx-background-color: #1dbbdd11;
+}
+
+/* ScrollBar  */
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+  -fx-background-color: rgb(0, 183, 255);
+}
+.darkmode {
+  -fx-background-color: black;
+}
+.TimeColor {
+  -fx-text-fill: rgb(65, 65, 252);
+}
