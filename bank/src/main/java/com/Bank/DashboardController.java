@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +36,7 @@ public class DashboardController implements Initializable {
     public AnchorPane dashpane = new AnchorPane();
     public PieChart expensepie = new PieChart();
     Stage window = new Stage();
+
     /* ACCOUNTS CONTROLLATION */
     public Label NAME = new Label();
     public Label NUMBER = new Label();
@@ -146,14 +149,16 @@ public class DashboardController implements Initializable {
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
         try {
-
             Connection connection = DBConnect.Embadded();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM ACCOUNTS");
+            Statement statement = connection.createStatement();
+            String fetch = "SELECT * FROM ACCOUNTS";
+            ResultSet resultSet = statement.executeQuery(fetch);
             /* while (resultSet.next()) { */
             if (resultSet.next()) {
                 NAME.setText(resultSet.getString("NAME"));
                 NUMBER.setText(resultSet.getString("NUMBER"));
                 AMMOUNT.setText(resultSet.getString("AMMOUNT"));
+                System.out.println(resultSet.getString("NAME"));
             }
         } catch (Exception e) {
             e.printStackTrace();

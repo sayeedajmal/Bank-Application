@@ -7,6 +7,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -64,7 +65,7 @@ public class FXMLController implements Initializable {
         focus();
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        String authentic = "SELECT * FROM USER WHERE USERNAME = ? and PASSWORD = ?";
+        String authentic = "SELECT * FROM users WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
             preparedStatement.setString(1, USERNAME);
@@ -120,6 +121,15 @@ public class FXMLController implements Initializable {
     /* THIS SECTION OS FOR REGISTERING NEW USERS..... */
     @FXML
     public void register(ActionEvent event) throws IOException, SQLException {
+
+        if (!doesTableExists("users", connection)) {
+            String users = "CREATE TABLE users (USERNAME VARCHAR(20) PRIMARY KEY, BIRTHDATE VARCHAR(20) NOT NULL, GENDER VARCHAR(8) NOT NULL, EMAIL VARCHAR(30) NOT NULL, PHONE VARCHAR(12) NOT NULL, PASSWORD VARCHAR(10) NOT NULL)";
+            Statement statement = connection.createStatement();
+            statement.execute(users);
+            System.out.println("Created table USERS.");
+        } else {
+            System.out.println("User table Already Exists");
+        }
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
         String PHONE = phone.getText();
@@ -128,7 +138,7 @@ public class FXMLController implements Initializable {
         String BIRTHDATE = date.toString();
         String GENDER = gender.getValue();
 
-        String insert = "INSERT INTO USER(USERNAME,PASSWORD,PHONE,EMAIL,BIRTHDATE,GENDER) VALUES(?,?,?,?,?,?)";
+        String insert = "INSERT INTO users(USERNAME,PASSWORD,PHONE,EMAIL,BIRTHDATE,GENDER) VALUES(?,?,?,?,?,?)";
 
         preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, USERNAME);
@@ -138,32 +148,29 @@ public class FXMLController implements Initializable {
         preparedStatement.setString(5, BIRTHDATE);
         preparedStatement.setString(6, GENDER);
 
-        if (!doesTableExists("USER", connection)) {
-            String create_table = "CREATE TABLE USER(USERNAME CHAR(20) PRIMARY KEY NOT NULL, BIRTHDATE VARCHAR(20) NOT NULL,GENDER VARCHAR(8) NOT NULL,EMAIL VARCHAR(30) NOT NULL,PHONE CHAR(12) NOT NULL, PASSWORD CHAR(10) NOT NULL)";
-            preparedStatement.executeQuery(create_table);
-            if (!USERNAME.isBlank() && !PASSWORD.isBlank() && !PHONE.isBlank() && !EMAIL.isBlank()
-                    && !BIRTHDATE.isBlank() && !GENDER.isBlank()) {
-                preparedStatement.executeUpdate();
-                Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                scene.getStylesheets().add("/styles/Styles.css");
-                stage.initStyle(StageStyle.TRANSPARENT);
-                Image icon = new Image("/Images/enter.png");
-                stage.setTitle("Login");
-                stage.centerOnScreen();
-                stage.getIcons().add(icon);
-                stage.setResizable(false);
-                stage.setScene(scene);
-                stage.show();
-                ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
-            } else {
-                System.out.println("Fill All Fields");
-            }
+        if (!USERNAME.isBlank() && !PASSWORD.isBlank() && !PHONE.isBlank() && !EMAIL.isBlank() && !BIRTHDATE.isBlank()
+                && !GENDER.isBlank()) {
+            preparedStatement.executeUpdate();
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            scene.getStylesheets().add("/styles/Styles.css");
+            stage.initStyle(StageStyle.TRANSPARENT);
+            Image icon = new Image("/Images/enter.png");
+            stage.setTitle("Login");
+            stage.centerOnScreen();
+            stage.getIcons().add(icon);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+            ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        } else {
+            System.out.println("Fill All Fields");
         }
     }
-/* CREATING METHOD FOR KNOWING "USER" TABLE ARE EXIST ARE NOT */
+
+    /* CREATING METHOD FOR KNOWING "USERs" TABLE ARE EXIST ARE NOT */
     public static boolean doesTableExists(String tableName, Connection connection) throws SQLException {
         DatabaseMetaData meta = connection.getMetaData();
         ResultSet resultSet = meta.getTables(null, null, tableName.toUpperCase(), null);
