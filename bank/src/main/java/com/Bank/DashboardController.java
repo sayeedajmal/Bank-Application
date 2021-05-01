@@ -146,7 +146,8 @@ public class DashboardController implements Initializable {
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
         try {
-            Connection connection = DBConnect.Connection();
+
+            Connection connection = DBConnect.Embadded();
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM ACCOUNTS");
             /* while (resultSet.next()) { */
             if (resultSet.next()) {
