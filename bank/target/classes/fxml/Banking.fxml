@@ -88,7 +88,7 @@
                         <Font name="Fira Code Bold" size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="IFSCODE" layoutX="170.0" layoutY="82.0" prefHeight="31.0" prefWidth="203.0" styleClass="color" stylesheets="@../styles/Styles.css" wrapText="true">
+                  <Label fx:id="IFSC" layoutX="170.0" layoutY="82.0" prefHeight="31.0" prefWidth="203.0" styleClass="color" stylesheets="@../styles/Styles.css" wrapText="true">
                      <font>
                         <Font name="Fira Code Bold" size="16.0" />
                      </font>

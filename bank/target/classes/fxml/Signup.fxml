@@ -24,31 +24,41 @@
             <Font name="Quicksand Medium" size="27.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="username" alignment="BOTTOM_CENTER" focusColor="WHITE" labelFloat="true" layoutX="34.0" layoutY="162.0" prefHeight="33.0" prefWidth="299.0" promptText="Name" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
+      <JFXTextField fx:id="username" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="36.0" layoutY="105.0" prefHeight="33.0" prefWidth="299.0" promptText="Username" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
          <font>
             <Font name="Georgia Bold" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXDatePicker fx:id="birthdate" defaultColor="RED" editable="false" layoutX="34.0" layoutY="218.0" prefHeight="33.0" prefWidth="299.0" promptText="Birthdate" showWeekNumbers="true" style="-fx-background-color: #ffff; -fx-alignment: center; -fx-background-radius: 10px;" styleClass="color" stylesheets="@../styles/Styles.css" />
-      <JFXComboBox fx:id="gender" cache="true" focusColor="BLACK" layoutX="34.0" layoutY="271.0" prefHeight="33.0" prefWidth="299.0" promptText="Gender" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: red;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED" />
-      <JFXTextField fx:id="email" alignment="BOTTOM_CENTER" focusColor="WHITE" labelFloat="true" layoutX="34.0" layoutY="329.0" prefHeight="33.0" prefWidth="299.0" promptText="Email" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
+      <JFXDatePicker fx:id="birthdate" defaultColor="RED" editable="false" layoutX="36.0" layoutY="160.0" prefHeight="33.0" prefWidth="299.0" promptText="Birthdate" showWeekNumbers="true" style="-fx-background-color: #ffff; -fx-alignment: center; -fx-background-radius: 10px;" styleClass="color" stylesheets="@../styles/Styles.css" />
+      <JFXComboBox fx:id="gender" cache="true" focusColor="BLACK" layoutX="36.0" layoutY="214.0" prefHeight="33.0" prefWidth="299.0" promptText="Gender" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: red;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED" />
+      <JFXTextField fx:id="account" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="36.0" layoutY="269.0" prefHeight="33.0" prefWidth="299.0" promptText="Account Number" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
          <font>
             <Font name="Georgia Bold" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="phone" alignment="BOTTOM_CENTER" focusColor="WHITE" labelFloat="true" layoutX="34.0" layoutY="387.0" prefHeight="33.0" prefWidth="299.0" promptText="Phone" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
+      <JFXTextField fx:id="ifsc" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="327.0" prefHeight="33.0" prefWidth="299.0" promptText="IFSC Code" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
          <font>
             <Font name="Georgia Bold" size="18.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="password" alignment="BOTTOM_CENTER" focusColor="WHITE" labelFloat="true" layoutX="35.0" layoutY="449.0" prefHeight="33.0" prefWidth="299.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
+      <JFXTextField fx:id="email" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="392.0" prefHeight="33.0" prefWidth="299.0" promptText="Email" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
+         <font>
+            <Font name="Georgia Bold" size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="phone" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="450.0" prefHeight="33.0" prefWidth="299.0" promptText="Phone" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
+         <font>
+            <Font name="Georgia Bold" size="18.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="512.0" prefHeight="33.0" prefWidth="299.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
          <font>
             <Font name="Georgia Bold" size="18.0" />
          </font>
       </JFXPasswordField>
-      <JFXButton alignment="CENTER" buttonType="RAISED" defaultButton="true" layoutX="138.0" layoutY="514.0" onAction="#register" prefHeight="40.0" prefWidth="94.0" ripplerFill="RED" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Sign Up" textAlignment="CENTER" textFill="RED" underline="true" wrapText="true">
+      <JFXButton alignment="CENTER" buttonType="RAISED" defaultButton="true" layoutX="132.0" layoutY="566.0" onAction="#register" prefHeight="51.0" prefWidth="108.0" ripplerFill="RED" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Sign Up" textAlignment="CENTER" textFill="RED" underline="true" wrapText="true">
          <font>
-            <Font name="Georgia Bold" size="17.0" />
+            <Font name="Lato Semibold" size="21.0" />
          </font>
          <cursor>
             <Cursor fx:constant="CLOSED_HAND" />

@@ -41,6 +41,7 @@ public class DashboardController implements Initializable {
     public Label NAME = new Label();
     public Label NUMBER = new Label();
     public Label AMMOUNT = new Label();
+    public Label IFSC = new Label();
 
     /* THIS SECTION IS FOR PIE PieChart */
     ObservableList<PieChart.Data> Data = FXCollections.observableArrayList(new PieChart.Data("Clothes", 16.66),
@@ -148,21 +149,22 @@ public class DashboardController implements Initializable {
         tableview.setItems(list);
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
+        /* FETCHING DATA FROM THE DATABASE */
         try {
             Connection connection = DBConnect.Embadded();
             Statement statement = connection.createStatement();
-            String fetch = "SELECT * FROM ACCOUNTS";
+            String fetch = "SELECT * FROM USERS";
             ResultSet resultSet = statement.executeQuery(fetch);
             /* while (resultSet.next()) { */
             if (resultSet.next()) {
-                NAME.setText(resultSet.getString("NAME"));
-                NUMBER.setText(resultSet.getString("NUMBER"));
+                NAME.setText(resultSet.getString("USERNAME"));
+                NUMBER.setText(resultSet.getString("ACCOUNT"));
                 AMMOUNT.setText(resultSet.getString("AMMOUNT"));
-                System.out.println(resultSet.getString("NAME"));
+                IFSC.setText(resultSet.getString("IFSC"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
 }

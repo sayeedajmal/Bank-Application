@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -33,12 +34,14 @@ import javafx.stage.StageStyle;
 
 public class FXMLController implements Initializable {
     public AnchorPane dashpane;
-    public JFXTextField username;
+    public JFXTextField username = new JFXTextField();
     public JFXDatePicker birthdate = new JFXDatePicker();
     public JFXComboBox<String> gender = new JFXComboBox<>();
-    public JFXTextField email;
-    public JFXTextField phone;
-    public JFXPasswordField password;
+    public JFXTextField email = new JFXTextField();
+    public JFXTextField phone = new JFXTextField();
+    public JFXPasswordField password = new JFXPasswordField();
+    public JFXTextField account = new JFXTextField();
+    public JFXTextField ifsc = new JFXTextField();
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
     Connection connection = null;
@@ -53,19 +56,18 @@ public class FXMLController implements Initializable {
     public void focus() {
         username.requestFocus();
         password.requestFocus();
-        /*
-         * email.requestFocus(); phone.requestFocus();
-         */
+        email.requestFocus();
+        phone.requestFocus();
     }
 
     /* THIS SECTION IS FOR Access */
     @FXML
-    public void Access(ActionEvent event) throws IOException {
+    public void Access(ActionEvent event) throws IOException, SQLException {
         // Convert USRENAME TO String and PASSWORD to String
         focus();
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        String authentic = "SELECT * FROM users WHERE USERNAME = ? and PASSWORD = ?";
+        String authentic = "SELECT * FROM USERS WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
             preparedStatement.setString(1, USERNAME);
@@ -122,8 +124,8 @@ public class FXMLController implements Initializable {
     @FXML
     public void register(ActionEvent event) throws IOException, SQLException {
 
-        if (!doesTableExists("users", connection)) {
-            String users = "CREATE TABLE users (USERNAME VARCHAR(20) PRIMARY KEY, BIRTHDATE VARCHAR(20) NOT NULL, GENDER VARCHAR(8) NOT NULL, EMAIL VARCHAR(30) NOT NULL, PHONE VARCHAR(12) NOT NULL, PASSWORD VARCHAR(10) NOT NULL)";
+        if (!doesTableExists("USERS", connection)) {
+            String users = "CREATE TABLE USERS (USERNAME VARCHAR(20) NOT NULL, BIRTHDATE VARCHAR(20) NOT NULL,GENDER VARCHAR(8) NOT NULL,ACCOUNT VARCHAR(20) PRIMARY KEY,IFSC VARCHAR(15) NOT NULL,EMAIL VARCHAR(30), PHONE VARCHAR(12) NOT NULL, PASSWORD VARCHAR(10) NOT NULL,AMMOUNT VARCHAR(20))";
             Statement statement = connection.createStatement();
             statement.execute(users);
             System.out.println("Created table USERS.");
@@ -131,25 +133,29 @@ public class FXMLController implements Initializable {
             System.out.println("User table Already Exists");
         }
         String USERNAME = username.getText();
-        String PASSWORD = password.getText();
-        String PHONE = phone.getText();
-        String EMAIL = email.getText();
         LocalDate date = birthdate.getValue();
         String BIRTHDATE = date.toString();
         String GENDER = gender.getValue();
+        String ACCOUNT = account.getText();
+        String IFSC = ifsc.getText();
+        String EMAIL = email.getText();
+        String PHONE = phone.getText();
+        String PASSWORD = password.getText();
 
-        String insert = "INSERT INTO users(USERNAME,PASSWORD,PHONE,EMAIL,BIRTHDATE,GENDER) VALUES(?,?,?,?,?,?)";
+        String insert = "INSERT INTO USERS(USERNAME,BIRTHDATE,GENDER,ACCOUNT,IFSC,EMAIL,PHONE,PASSWORD) VALUES(?,?,?,?,?,?,?,?)";
 
         preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, USERNAME);
-        preparedStatement.setString(2, PASSWORD);
-        preparedStatement.setString(3, PHONE);
-        preparedStatement.setString(4, EMAIL);
-        preparedStatement.setString(5, BIRTHDATE);
-        preparedStatement.setString(6, GENDER);
+        preparedStatement.setString(2, BIRTHDATE);
+        preparedStatement.setString(3, GENDER);
+        preparedStatement.setString(4, ACCOUNT);
+        preparedStatement.setString(5, IFSC);
+        preparedStatement.setString(6, EMAIL);
+        preparedStatement.setString(7, PHONE);
+        preparedStatement.setString(8, PASSWORD);
 
-        if (!USERNAME.isBlank() && !PASSWORD.isBlank() && !PHONE.isBlank() && !EMAIL.isBlank() && !BIRTHDATE.isBlank()
-                && !GENDER.isBlank()) {
+        if (!USERNAME.isBlank() && !PASSWORD.isBlank() && !ACCOUNT.isBlank() && !IFSC.isBlank() && !PHONE.isBlank()
+                && !EMAIL.isBlank() && !BIRTHDATE.isBlank() && !GENDER.isBlank()) {
             preparedStatement.executeUpdate();
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
             Scene scene = new Scene(root);
