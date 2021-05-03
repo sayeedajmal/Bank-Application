@@ -63,7 +63,7 @@
                         <Font name="Fira Code Regular" size="19.0" />
                      </font>
                   </Label>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="88.0" layoutY="209.0" prefHeight="52.0" prefWidth="119.0" ripplerFill="#031707" style="-fx-background-radius: 10px; -fx-background-color: #078474;" text="Deposite" textFill="WHITE">
+                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="88.0" layoutY="209.0" onAction="#depositebutton" prefHeight="52.0" prefWidth="119.0" ripplerFill="#00ff2f" style="-fx-background-radius: 10px; -fx-background-color: #078474; -fx-border-color: blue; -fx-border-radius: 10px;" text="Deposite" textFill="WHITE">
                      <font>
                         <Font name="DejaVu Sans Condensed Bold" size="17.0" />
                      </font>
