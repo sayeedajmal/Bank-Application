@@ -10,6 +10,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,12 +38,12 @@ public class DashboardController implements Initializable {
     public AnchorPane dashpane = new AnchorPane();
     public PieChart expensepie = new PieChart();
     Stage window = new Stage();
-
     /* ACCOUNTS CONTROLLATION */
     public Label NAME = new Label();
     public Label NUMBER = new Label();
     public Label AMMOUNT = new Label();
     public Label IFSC = new Label();
+    public JFXTextField depositeammount = new JFXTextField();
 
     /* THIS SECTION IS FOR PIE PieChart */
     ObservableList<PieChart.Data> Data = FXCollections.observableArrayList(new PieChart.Data("Clothes", 16.66),
@@ -98,6 +100,47 @@ public class DashboardController implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
+    }
+
+    @FXML
+    public void depositebutton() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Deposite.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("Banking");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void Donebutton() {
+        try {
+            Connection connection = DBConnect.Embadded();
+            Statement statement = connection.createStatement();
+            String fetch = "UPDATE USERS SET AMMOUNT='33.56' WHERE USERNAME='SAYEED AJMAL'";
+            /* String amm = depositeammount.toString(); */
+            /* preparedStatement.setString(1, amm); */
+            statement.execute(fetch);
+            ResultSet resultSet = statement.getResultSet();
+            /* while (resultSet.next()) { */
+            if (resultSet.next()) {
+                NAME.setText(resultSet.getString("USERNAME"));
+                NUMBER.setText(resultSet.getString("ACCOUNT"));
+                AMMOUNT.setText(resultSet.getString("AMMOUNT"));
+                IFSC.setText(resultSet.getString("IFSC"));
+                depositeammount.setText(null);
+                System.out.println("Deposited hehehehe");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
