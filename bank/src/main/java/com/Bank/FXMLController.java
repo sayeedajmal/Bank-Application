@@ -32,10 +32,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class FXMLController implements Initializable {
-    AnchorPane dashpane;
+    public AnchorPane dashpane;
     JFXTextField username = new JFXTextField();
     JFXTextField login_username = new JFXTextField();
-    JFXDatePicker birthdate = new JFXDatePicker();
+    public JFXDatePicker birthdate = new JFXDatePicker();
     public JFXComboBox<String> gender = new JFXComboBox<>();
     JFXTextField email = new JFXTextField();
     JFXTextField phone = new JFXTextField();
@@ -45,7 +45,7 @@ public class FXMLController implements Initializable {
     JFXTextField ifsc = new JFXTextField();
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
-    Connection connection = null;
+    Connection connection = DBConnect.Embadded();
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 

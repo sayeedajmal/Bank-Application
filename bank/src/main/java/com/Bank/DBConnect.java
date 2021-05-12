@@ -9,5 +9,4 @@ public class DBConnect {
         Connection connection = DriverManager.getConnection(databaseURL);
         return connection;
     }
-
 }
