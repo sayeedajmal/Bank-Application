@@ -48,6 +48,7 @@ public class FXMLController implements Initializable {
     Connection connection = DBConnect.Embadded();
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
+    String username_String = username.getText();
 
     public FXMLController() throws SQLException, ClassNotFoundException {
         connection = DBConnect.Embadded();
@@ -68,7 +69,7 @@ public class FXMLController implements Initializable {
         focus();
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        String authentic = "SELECT * FROM USERS WHERE USERNAME = ? and PASSWORD = ?";
+        String authentic = "SELECT * FROM" + username_String.toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
             preparedStatement.setString(1, USERNAME);
@@ -125,10 +126,11 @@ public class FXMLController implements Initializable {
     @FXML
     public void register(ActionEvent event) throws IOException, SQLException {
 
-        if (!doesTableExists("USERS", connection)) {
-            String users = "CREATE TABLE USERS (USERNAME VARCHAR(20) NOT NULL, BIRTHDATE VARCHAR(20) NOT NULL,GENDER VARCHAR(8) NOT NULL,ACCOUNT VARCHAR(20) PRIMARY KEY,IFSC VARCHAR(15) NOT NULL,EMAIL VARCHAR(30), PHONE VARCHAR(12) NOT NULL, PASSWORD VARCHAR(10) NOT NULL,AMMOUNT VARCHAR(20))";
+        if (!doesTableExists(username_String.toUpperCase(), connection)) {
+            String users_create = "CREATE TABLE " + username_String.toUpperCase()
+                    + " (USERNAME varchar(20) NOT NULL, BIRTHDATE varchar(20) NOT NULL,GENDER varchar(8) NOT NULL,ACCOUNT integer(20) PRIMARY KEY,IFSC varchar(15) NOT NULL,EMAIL varchar(30) not null, PHONE integer(12) NOT NULL, PASSWORD varchar(10) NOT NULL,AMMOUNT decimal(20))";
             Statement statement = connection.createStatement();
-            statement.execute(users);
+            statement.execute(users_create);
             System.out.println("Created table USERS.");
         } else {
             System.out.println("User table Already Exists");
@@ -143,7 +145,8 @@ public class FXMLController implements Initializable {
         String PHONE = phone.getText();
         String PASSWORD = password.getText();
 
-        String insert = "INSERT INTO USERS(USERNAME,BIRTHDATE,GENDER,ACCOUNT,IFSC,EMAIL,PHONE,PASSWORD) VALUES(?,?,?,?,?,?,?,?)";
+        String insert = "INSERT INTO" + username_String.toUpperCase()
+                + "(USERNAME,BIRTHDATE,GENDER,ACCOUNT,IFSC,EMAIL,PHONE,PASSWORD) VALUES(?,?,?,?,?,?,?,?)";
 
         preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, USERNAME);
