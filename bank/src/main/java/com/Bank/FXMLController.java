@@ -10,12 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,22 +31,21 @@ import javafx.stage.StageStyle;
 
 public class FXMLController implements Initializable {
     public AnchorPane dashpane;
-    JFXTextField username = new JFXTextField();
-    JFXTextField login_username = new JFXTextField();
+    public JFXTextField username = new JFXTextField();
+    public JFXTextField login_username = new JFXTextField();
     public JFXDatePicker birthdate = new JFXDatePicker();
     public JFXComboBox<String> gender = new JFXComboBox<>();
-    JFXTextField email = new JFXTextField();
-    JFXTextField phone = new JFXTextField();
-    JFXPasswordField password = new JFXPasswordField();
-    JFXPasswordField login_password = new JFXPasswordField();
-    JFXTextField account = new JFXTextField();
-    JFXTextField ifsc = new JFXTextField();
+    public JFXTextField email = new JFXTextField();
+    public JFXTextField phone = new JFXTextField();
+    public JFXPasswordField password = new JFXPasswordField();
+    public JFXPasswordField login_password = new JFXPasswordField();
+    public JFXTextField account = new JFXTextField();
+    public JFXTextField ifsc = new JFXTextField();
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
     Connection connection = DBConnect.Embadded();
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
-    String username_String = username.getText();
 
     public FXMLController() throws SQLException, ClassNotFoundException {
         connection = DBConnect.Embadded();
@@ -69,7 +66,7 @@ public class FXMLController implements Initializable {
         focus();
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        String authentic = "SELECT * FROM" + username_String.toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
+        String authentic = "SELECT * FROM " + username.getText().toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
             preparedStatement.setString(1, USERNAME);
@@ -126,9 +123,10 @@ public class FXMLController implements Initializable {
     @FXML
     public void register(ActionEvent event) throws IOException, SQLException {
 
-        if (!doesTableExists(username_String.toUpperCase(), connection)) {
-            String users_create = "CREATE TABLE " + username_String.toUpperCase()
-                    + " (USERNAME varchar(20) NOT NULL, BIRTHDATE varchar(20) NOT NULL,GENDER varchar(8) NOT NULL,ACCOUNT integer(20) PRIMARY KEY,IFSC varchar(15) NOT NULL,EMAIL varchar(30) not null, PHONE integer(12) NOT NULL, PASSWORD varchar(10) NOT NULL,AMMOUNT decimal(20))";
+        if (!doesTableExists(username.getText().toUpperCase(), connection)) {
+            String users_create = "create table " + username.getText().toUpperCase() + " ( "
+                    + "username varchar(20) not null, birthdate varchar(20) not null,gender varchar(8) not null,account varchar(20) not null,ifsc varchar(15),email varchar(30), phone varchar(20) not null, password varchar(10),ammount varchar(20) not null,primary key(account)"
+                    + " )";
             Statement statement = connection.createStatement();
             statement.execute(users_create);
             System.out.println("Created table USERS.");
@@ -145,8 +143,7 @@ public class FXMLController implements Initializable {
         String PHONE = phone.getText();
         String PASSWORD = password.getText();
 
-        String insert = "INSERT INTO" + username_String.toUpperCase()
-                + "(USERNAME,BIRTHDATE,GENDER,ACCOUNT,IFSC,EMAIL,PHONE,PASSWORD) VALUES(?,?,?,?,?,?,?,?)";
+        String insert = "insert into " + username.getText().toUpperCase() + " values (?,?,?,?,?,?,?,?,'20')";
 
         preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, USERNAME);

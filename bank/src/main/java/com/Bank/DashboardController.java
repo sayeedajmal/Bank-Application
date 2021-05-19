@@ -38,6 +38,7 @@ public class DashboardController implements Initializable {
     public AnchorPane dashpane = new AnchorPane();
     public PieChart expensepie = new PieChart();
     Stage window = new Stage();
+    public JFXTextField username = new JFXTextField();
     /* ACCOUNTS CONTROLLATION */
     public Label NAME = new Label();
     public Label NUMBER = new Label();
@@ -121,26 +122,21 @@ public class DashboardController implements Initializable {
 
     @FXML
     public void Donebutton() {
-        try {
-            Connection connection = DBConnect.Embadded();
-            Statement statement = connection.createStatement();
-            String fetch = "UPDATE USERS SET AMMOUNT='33.56' WHERE USERNAME='SAYEED AJMAL'";
-            /* String amm = depositeammount.toString(); */
-            /* preparedStatement.setString(1, amm); */
-            statement.execute(fetch);
-            ResultSet resultSet = statement.getResultSet();
-            /* while (resultSet.next()) { */
-            if (resultSet.next()) {
-                NAME.setText(resultSet.getString("USERNAME"));
-                NUMBER.setText(resultSet.getString("ACCOUNT"));
-                AMMOUNT.setText(resultSet.getString("AMMOUNT"));
-                IFSC.setText(resultSet.getString("IFSC"));
-                depositeammount.setText(null);
-                System.out.println("Deposited hehehehe");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        /*
+         * try { Connection connection = DBConnect.Embadded(); Statement statement =
+         * connection.createStatement(); String fetch = "update " +
+         * username.getText().toString() + " set ammount='33.56' WHERE USERNAME='" +
+         * username.getText().toString().toUpperCase() + "'"; statement.execute(fetch);
+         * ResultSet resultSet = statement.getResultSet();
+         * 
+         * if (resultSet.next()) { NAME.setText(resultSet.getString("username"));
+         * NUMBER.setText(resultSet.getString("account"));
+         * AMMOUNT.setText(resultSet.getString("ammount"));
+         * IFSC.setText(resultSet.getString("ifsc")); depositeammount.setText(null);
+         * System.out.println("Deposited hehehehe"); } } catch (Exception e) {
+         * e.printStackTrace(); }
+         */
+        System.out.println("You Clicked the Done button");
     }
 
     @FXML
@@ -196,14 +192,14 @@ public class DashboardController implements Initializable {
         try {
             Connection connection = DBConnect.Embadded();
             Statement statement = connection.createStatement();
-            String fetch = "SELECT * FROM USERS";
+            String fetch = "select * from " + username.getText().toString().toUpperCase();
             ResultSet resultSet = statement.executeQuery(fetch);
             /* while (resultSet.next()) { */
             if (resultSet.next()) {
-                NAME.setText(resultSet.getString("USERNAME"));
-                NUMBER.setText(resultSet.getString("ACCOUNT"));
-                AMMOUNT.setText(resultSet.getString("AMMOUNT"));
-                IFSC.setText(resultSet.getString("IFSC"));
+                NAME.setText(resultSet.getString("username"));
+                NUMBER.setText(resultSet.getString("account"));
+                AMMOUNT.setText(resultSet.getString("ammount"));
+                IFSC.setText(resultSet.getString("ifsc"));
             }
         } catch (Exception e) {
             e.printStackTrace();
