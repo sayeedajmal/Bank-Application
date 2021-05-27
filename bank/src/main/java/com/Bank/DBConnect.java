@@ -12,7 +12,7 @@ public class DBConnect {
 
     public static void main(String[] args) throws SQLException {
         Connection connection = Embadded();
-        String query = "SELECT * FROM ADMIN";
+        String query = "SELECT * FROM SAYEED";
         Statement preparedStatement = connection.createStatement();
         preparedStatement.executeQuery(query);
         ResultSet resultSet = preparedStatement.getResultSet();
@@ -25,6 +25,7 @@ public class DBConnect {
             System.out.println(resultSet.getString("email"));
             System.out.println(resultSet.getString("phone"));
             System.out.println(resultSet.getString("password"));
+            System.out.println(resultSet.getString("ammount"));
         } else {
 
         }

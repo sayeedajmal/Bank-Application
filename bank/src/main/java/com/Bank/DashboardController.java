@@ -197,8 +197,11 @@ public class DashboardController implements Initializable {
             /* while (resultSet.next()) { */
             if (resultSet.next()) {
                 NAME.setText(resultSet.getString("username"));
+                System.out.println(resultSet.getString("username"));
                 NUMBER.setText(resultSet.getString("account"));
+                System.out.println(resultSet.getString("account"));
                 AMMOUNT.setText(resultSet.getString("ammount"));
+                System.out.println(resultSet.getString("ammount"));
                 IFSC.setText(resultSet.getString("ifsc"));
             }
         } catch (Exception e) {
