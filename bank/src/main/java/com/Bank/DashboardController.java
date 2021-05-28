@@ -1,14 +1,18 @@
 package com.Bank;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import com.jfoenix.controls.JFXTextField;
 
@@ -38,12 +42,12 @@ public class DashboardController implements Initializable {
     public AnchorPane dashpane = new AnchorPane();
     public PieChart expensepie = new PieChart();
     Stage window = new Stage();
-    public JFXTextField username = new JFXTextField();
     /* ACCOUNTS CONTROLLATION */
     public Label NAME = new Label();
     public Label NUMBER = new Label();
     public Label AMMOUNT = new Label();
     public Label IFSC = new Label();
+    String uname;
     public JFXTextField depositeammount = new JFXTextField();
 
     /* THIS SECTION IS FOR PIE PieChart */
@@ -122,20 +126,25 @@ public class DashboardController implements Initializable {
 
     @FXML
     public void Donebutton() {
-        /*
-         * try { Connection connection = DBConnect.Embadded(); Statement statement =
-         * connection.createStatement(); String fetch = "update " +
-         * username.getText().toString() + " set ammount='33.56' WHERE USERNAME='" +
-         * username.getText().toString().toUpperCase() + "'"; statement.execute(fetch);
-         * ResultSet resultSet = statement.getResultSet();
-         * 
-         * if (resultSet.next()) { NAME.setText(resultSet.getString("username"));
-         * NUMBER.setText(resultSet.getString("account"));
-         * AMMOUNT.setText(resultSet.getString("ammount"));
-         * IFSC.setText(resultSet.getString("ifsc")); depositeammount.setText(null);
-         * System.out.println("Deposited hehehehe"); } } catch (Exception e) {
-         * e.printStackTrace(); }
-         */
+
+        try {
+            Connection connection = DBConnect.Embadded();
+            Statement statement = connection.createStatement();
+            String fetch = "update " + uname.toUpperCase() + " set ammount='33' WHERE USERNAME='" + uname.toLowerCase()
+                    + " '";
+            statement.execute(fetch);
+            ResultSet resultSet = statement.getResultSet();
+            if (resultSet.next()) {
+                NAME.setText(resultSet.getString("username"));
+                NUMBER.setText(resultSet.getString("account"));
+                AMMOUNT.setText(resultSet.getString("ammount"));
+                IFSC.setText(resultSet.getString("ifsc"));
+                depositeammount.setText(null);
+                System.out.println("Deposited hehehehe");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("You Clicked the Done button");
     }
 
@@ -189,23 +198,29 @@ public class DashboardController implements Initializable {
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
         /* FETCHING DATA FROM THE DATABASE */
+        File file = new File("username.txt");
         try {
             Connection connection = DBConnect.Embadded();
-            Statement statement = connection.createStatement();
-            String fetch = "select * from " + username.getText().toString().toUpperCase();
-            ResultSet resultSet = statement.executeQuery(fetch);
-            /* while (resultSet.next()) { */
-            if (resultSet.next()) {
-                NAME.setText(resultSet.getString("username"));
-                System.out.println(resultSet.getString("username"));
-                NUMBER.setText(resultSet.getString("account"));
-                System.out.println(resultSet.getString("account"));
-                AMMOUNT.setText(resultSet.getString("ammount"));
-                System.out.println(resultSet.getString("ammount"));
-                IFSC.setText(resultSet.getString("ifsc"));
+            Scanner input = new Scanner(file);
+            while (input.hasNextLine()) {
+                uname = input.nextLine();
+                String query = "select * from " + uname.toUpperCase();
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    NAME.setText(resultSet.getString("username"));
+                    NUMBER.setText(resultSet.getString("account"));
+                    AMMOUNT.setText(resultSet.getString("ammount"));
+                    IFSC.setText(resultSet.getString("ifsc"));
+                } else {
+                    System.out.println("I can't Think About That");
+                }
             }
-        } catch (Exception e) {
+            input.close();
+        } catch (FileNotFoundException | SQLException e) {
             e.printStackTrace();
+            System.out.println("fuck it");
         }
     }
 

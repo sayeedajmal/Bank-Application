@@ -1,5 +1,7 @@
 package com.Bank;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -51,21 +53,16 @@ public class FXMLController implements Initializable {
         connection = DBConnect.Embadded();
     }
 
-    /* REQUESTING FOCUS OF KEYBOARD AND MOUSE OVER TEXTFIELD */
-    public void focus() {
-        username.requestFocus();
-        password.requestFocus();
-        email.requestFocus();
-        phone.requestFocus();
-    }
-
     /* THIS SECTION IS FOR Access */
     @FXML
     public void Access(ActionEvent event) throws IOException, SQLException {
         // Convert USRENAME TO String and PASSWORD to String
-        focus();
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
+        File file = new File("username.txt");
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.append(USERNAME.toUpperCase());
+        fileWriter.close();
         String authentic = "SELECT * FROM " + username.getText().toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
