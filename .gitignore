@@ -1,3 +1,4 @@
 derby.log
 /database
-/target
+Bank/target
+Db_Test
