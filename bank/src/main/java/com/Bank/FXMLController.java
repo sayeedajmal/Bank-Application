@@ -61,7 +61,7 @@ public class FXMLController implements Initializable {
         String PASSWORD = password.getText();
         File file = new File("username.txt");
         FileWriter fileWriter = new FileWriter(file);
-        fileWriter.append(USERNAME.toUpperCase());
+        fileWriter.append(USERNAME.toUpperCase()+"\n"+PASSWORD);
         fileWriter.close();
         String authentic = "SELECT * FROM " + username.getText().toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {

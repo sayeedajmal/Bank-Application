@@ -126,22 +126,29 @@ public class DashboardController implements Initializable {
 
     @FXML
     public void Donebutton() {
-
+        File file = new File("username.txt");
         try {
             Connection connection = DBConnect.Embadded();
             Statement statement = connection.createStatement();
-            String fetch = "update " + uname.toUpperCase() + " set ammount='33' WHERE USERNAME='" + uname.toLowerCase()
-                    + " '";
-            statement.execute(fetch);
-            ResultSet resultSet = statement.getResultSet();
-            if (resultSet.next()) {
-                NAME.setText(resultSet.getString("username"));
-                NUMBER.setText(resultSet.getString("account"));
-                AMMOUNT.setText(resultSet.getString("ammount"));
-                IFSC.setText(resultSet.getString("ifsc"));
-                depositeammount.setText(null);
-                System.out.println("Deposited hehehehe");
+            Scanner input = new Scanner(file);
+            while (input.hasNext()) {
+                uname=input.next();
+                String fetch = "update " + uname.toUpperCase() + " set ammount='33' WHERE USERNAME='"
+                        + uname.toLowerCase() + " '";
+                statement.execute(fetch);
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    NAME.setText(resultSet.getString("username"));
+                    NUMBER.setText(resultSet.getString("account"));
+                    AMMOUNT.setText(resultSet.getString("ammount"));
+                    IFSC.setText(resultSet.getString("ifsc"));
+                    depositeammount.setText(null);
+                    System.out.println("Deposited hehehehe");
+                } else {
+                    System.out.println("Oh God");
+                }
             }
+            input.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,8 +209,8 @@ public class DashboardController implements Initializable {
         try {
             Connection connection = DBConnect.Embadded();
             Scanner input = new Scanner(file);
-            while (input.hasNextLine()) {
-                uname = input.nextLine();
+            while (input.hasNext()) {
+                uname = input.next();
                 String query = "select * from " + uname.toUpperCase();
                 Statement statement = connection.createStatement();
                 statement.execute(query);
