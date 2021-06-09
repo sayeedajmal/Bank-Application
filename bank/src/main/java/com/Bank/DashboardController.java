@@ -127,28 +127,24 @@ public class DashboardController implements Initializable {
     @FXML
     public void Donebutton() {
         File file = new File("username.txt");
+        File Pass = new File("password.txt");
         try {
-            Connection connection = DBConnect.Embadded();
-            Statement statement = connection.createStatement();
-            Scanner input = new Scanner(file);
-            while (input.hasNext()) {
-                uname=input.next();
-                String fetch = "update " + uname.toUpperCase() + " set ammount='33' WHERE USERNAME='"
-                        + uname.toLowerCase() + " '";
-                statement.execute(fetch);
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    NAME.setText(resultSet.getString("username"));
-                    NUMBER.setText(resultSet.getString("account"));
-                    AMMOUNT.setText(resultSet.getString("ammount"));
-                    IFSC.setText(resultSet.getString("ifsc"));
-                    depositeammount.setText(null);
-                    System.out.println("Deposited hehehehe");
-                } else {
-                    System.out.println("Oh God");
+            Scanner password = new Scanner(Pass);
+            while (password.hasNext()) {
+                String Password = password.next();
+                Connection connection = DBConnect.Embadded();
+                Statement statement = connection.createStatement();
+                Scanner input = new Scanner(file);
+                while (input.hasNext()) {
+                    uname = input.next();
+                    String fetch = "update " + uname.toUpperCase() + " set ammount='33' WHERE USERNAME='" + Password
+                            + " '";
+                    statement.executeUpdate(fetch);
                 }
+                input.close();
             }
-            input.close();
+            password.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -59,10 +59,14 @@ public class FXMLController implements Initializable {
         // Convert USRENAME TO String and PASSWORD to String
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        File file = new File("username.txt");
-        FileWriter fileWriter = new FileWriter(file);
-        fileWriter.append(USERNAME.toUpperCase()+"\n"+PASSWORD);
+        File text_user = new File("username.txt");
+        FileWriter fileWriter = new FileWriter(text_user);
+        File text_password = new File("password.txt");
+        FileWriter fileWriter2 = new FileWriter(text_password);
+        fileWriter2.append(PASSWORD);
+        fileWriter.append(USERNAME.toUpperCase());
         fileWriter.close();
+        fileWriter2.close();
         String authentic = "SELECT * FROM " + username.getText().toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
