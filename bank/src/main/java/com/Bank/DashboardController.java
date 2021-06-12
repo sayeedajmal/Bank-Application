@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -108,7 +109,7 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void depositebutton() throws IOException {
+    public void depositebutton(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Deposite.fxml"));
         Scene scene = new Scene(root);
@@ -122,24 +123,29 @@ public class DashboardController implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.showAndWait();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
-    public void Donebutton() {
-        File file = new File("username.txt");
+    public void Donebutton(ActionEvent event) {
+        File user = new File("username.txt");
         File Pass = new File("password.txt");
         try {
             Scanner password = new Scanner(Pass);
             while (password.hasNext()) {
                 String Password = password.next();
                 Connection connection = DBConnect.Embadded();
-                Statement statement = connection.createStatement();
-                Scanner input = new Scanner(file);
+                Scanner input = new Scanner(user);
                 while (input.hasNext()) {
                     uname = input.next();
-                    String fetch = "update " + uname.toUpperCase() + " set ammount='33' WHERE USERNAME='" + Password
+                    String fetch = "update " + uname.toUpperCase() + " set ammount=? WHERE password='" + Password
                             + " '";
-                    statement.executeUpdate(fetch);
+                    String update_ammount = depositeammount.getText();
+                    PreparedStatement preparedStatement = connection.prepareStatement(fetch);
+                    preparedStatement.setString(1, update_ammount);
+                    preparedStatement.executeUpdate();
+                    fetch();
+                    No(event);
                 }
                 input.close();
             }
@@ -161,6 +167,17 @@ public class DashboardController implements Initializable {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
+    @FXML
+    public void close(ActionEvent event) {
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        File user = new File("username.txt");
+        File Pass = new File("password.txt");
+        if (user.exists() && Pass.exists()) {
+            user.delete();
+            Pass.delete();
+        }
+    }
+
     /* THIS IS THE TABLE VIEW FOR MiniTransactions */
     @FXML
     TableView<MiniTransaction> tableview = new TableView<>();
@@ -169,6 +186,34 @@ public class DashboardController implements Initializable {
     public TableColumn<MiniTransaction, String> Payment = new TableColumn<>();
     public TableColumn<MiniTransaction, Integer> Ammount = new TableColumn<>();
     /* SHOWING NAME ACCOUNT NUMBER & AMMOUNT */
+
+    /* FETCHING */
+    public void fetch() {
+        File file = new File("username.txt");
+        try {
+            Connection connection = DBConnect.Embadded();
+            Scanner input = new Scanner(file);
+            while (input.hasNext()) {
+                uname = input.next();
+                String query = "select * from " + uname.toUpperCase();
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    NAME.setText(resultSet.getString("username"));
+                    NUMBER.setText(resultSet.getString("account"));
+                    AMMOUNT.setText(resultSet.getString("ammount"));
+                    IFSC.setText(resultSet.getString("ifsc"));
+                } else {
+                    System.out.println("I can't Think About That");
+                }
+            }
+            input.close();
+        } catch (FileNotFoundException | SQLException e) {
+            e.printStackTrace();
+            System.out.println("fuck it");
+        }
+    }
 
     @Override
     /* <<=============== This SECTION is for Initialize =================>> */
@@ -201,30 +246,7 @@ public class DashboardController implements Initializable {
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
         /* FETCHING DATA FROM THE DATABASE */
-        File file = new File("username.txt");
-        try {
-            Connection connection = DBConnect.Embadded();
-            Scanner input = new Scanner(file);
-            while (input.hasNext()) {
-                uname = input.next();
-                String query = "select * from " + uname.toUpperCase();
-                Statement statement = connection.createStatement();
-                statement.execute(query);
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    NAME.setText(resultSet.getString("username"));
-                    NUMBER.setText(resultSet.getString("account"));
-                    AMMOUNT.setText(resultSet.getString("ammount"));
-                    IFSC.setText(resultSet.getString("ifsc"));
-                } else {
-                    System.out.println("I can't Think About That");
-                }
-            }
-            input.close();
-        } catch (FileNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("fuck it");
-        }
+        fetch();
     }
 
 }
