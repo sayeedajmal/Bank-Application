@@ -127,34 +127,46 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void Donebutton(ActionEvent event) {
+    public void Donebutton(ActionEvent event) throws IOException, InterruptedException {
         File user = new File("username.txt");
         File Pass = new File("password.txt");
         try {
             Scanner password = new Scanner(Pass);
             while (password.hasNext()) {
-                String Password = password.next();
                 Connection connection = DBConnect.Embadded();
-                Scanner input = new Scanner(user);
-                while (input.hasNext()) {
-                    uname = input.next();
-                    String fetch = "update " + uname.toUpperCase() + " set ammount=? WHERE password='" + Password
-                            + " '";
-                    String update_ammount = depositeammount.getText();
-                    PreparedStatement preparedStatement = connection.prepareStatement(fetch);
-                    preparedStatement.setString(1, update_ammount);
-                    preparedStatement.executeUpdate();
-                    fetch();
-                    No(event);
+                /* Fetching the Ammount */
+                String query = "SELECT AMMOUNT FROM " + uname.toUpperCase();
+                Integer ammount;
+                Statement statement = connection.createStatement();
+                statement.executeQuery(query);
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    ammount = resultSet.getInt("AMMOUNT");
+                    /* Adding The Money */
+                    String Password = password.next();
+                    Scanner input = new Scanner(user);
+                    while (input.hasNext()) {
+                        uname = input.next();
+                        String fetch = "update " + uname.toUpperCase() + " set ammount=? WHERE password='" + Password
+                                + " '";
+                        String update_ammount = depositeammount.getText();
+                        int change_int = Integer.parseInt(update_ammount);
+                        int adding = ammount + change_int;
+                        PreparedStatement preparedStatement = connection.prepareStatement(fetch);
+                        preparedStatement.setInt(1, adding);
+                        preparedStatement.executeUpdate();
+                        No(event);
+                    }
+                    input.close();
                 }
-                input.close();
+
             }
             password.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("You Clicked the Done button");
+        System.out.println("Deposited Your Ammount");
     }
 
     @FXML
@@ -213,6 +225,25 @@ public class DashboardController implements Initializable {
             e.printStackTrace();
             System.out.println("fuck it");
         }
+    }
+
+    /* Refresh Button */
+    public void refresh(ActionEvent event) throws InterruptedException, IOException {
+        No(event);
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Dashboard.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image icon = new Image("/Images/account.png");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Dashboard");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.getIcons().add(icon);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        fetch();
     }
 
     @Override

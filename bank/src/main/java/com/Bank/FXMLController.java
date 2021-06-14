@@ -126,7 +126,7 @@ public class FXMLController implements Initializable {
 
         if (!doesTableExists(username.getText().toUpperCase(), connection)) {
             String users_create = "create table " + username.getText().toUpperCase() + " ( "
-                    + "username varchar(20) not null, birthdate varchar(20) not null,gender varchar(8) not null,account varchar(20) not null,ifsc varchar(15),email varchar(30), phone varchar(20) not null, password varchar(10),ammount varchar(20) not null,primary key(account)"
+                    + "username varchar(20) not null, birthdate varchar(20) not null,gender varchar(8) not null,account varchar(20) not null,ifsc varchar(15),email varchar(30), phone varchar(20) not null, password varchar(10),ammount integer ,primary key(account)"
                     + " )";
             Statement statement = connection.createStatement();
             statement.execute(users_create);
@@ -144,7 +144,7 @@ public class FXMLController implements Initializable {
         String PHONE = phone.getText();
         String PASSWORD = password.getText();
 
-        String insert = "insert into " + username.getText().toUpperCase() + " values (?,?,?,?,?,?,?,?,'20')";
+        String insert = "insert into " + username.getText().toUpperCase() + " values (?,?,?,?,?,?,?,?,20)";
 
         preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, USERNAME);

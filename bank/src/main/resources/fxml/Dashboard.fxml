@@ -254,7 +254,7 @@
                   </Pane>
                </children>
             </Pane>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1148.0" layoutY="88.0" prefHeight="29.0" prefWidth="37.0" ripplerFill="#783636">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1148.0" layoutY="88.0" onAction="#refresh" prefHeight="29.0" prefWidth="37.0" ripplerFill="#783636">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
