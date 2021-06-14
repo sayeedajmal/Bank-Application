@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -116,7 +115,7 @@ public class DashboardController implements Initializable {
         scene.getStylesheets().add("/styles/Styles.css");
         Image Icon = new Image("/Images/user.png");
         stage.getIcons().add(Icon);
-        stage.setTitle("Banking");
+        stage.setTitle("Deposite");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.centerOnScreen();
@@ -127,47 +126,23 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
-    public void Donebutton(ActionEvent event) throws IOException, InterruptedException {
-        File user = new File("username.txt");
-        File Pass = new File("password.txt");
-        try {
-            Scanner password = new Scanner(Pass);
-            while (password.hasNext()) {
-                Connection connection = DBConnect.Embadded();
-                /* Fetching the Ammount */
-                String query = "SELECT AMMOUNT FROM " + uname.toUpperCase();
-                Integer ammount;
-                Statement statement = connection.createStatement();
-                statement.executeQuery(query);
-                ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    ammount = resultSet.getInt("AMMOUNT");
-                    /* Adding The Money */
-                    String Password = password.next();
-                    Scanner input = new Scanner(user);
-                    while (input.hasNext()) {
-                        uname = input.next();
-                        String fetch = "update " + uname.toUpperCase() + " set ammount=? WHERE password='" + Password
-                                + " '";
-                        String update_ammount = depositeammount.getText();
-                        int change_int = Integer.parseInt(update_ammount);
-                        int adding = ammount + change_int;
-                        PreparedStatement preparedStatement = connection.prepareStatement(fetch);
-                        preparedStatement.setInt(1, adding);
-                        preparedStatement.executeUpdate();
-                        No(event);
-                    }
-                    input.close();
-                }
-
-            }
-            password.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Deposited Your Ammount");
+    public void withdrawbutton(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/withdrawal.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("WithDraw");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
+
 
     @FXML
     public void minimize(ActionEvent event) {
