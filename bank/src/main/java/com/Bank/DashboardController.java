@@ -143,7 +143,6 @@ public class DashboardController implements Initializable {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
-
     @FXML
     public void minimize(ActionEvent event) {
 
@@ -157,8 +156,12 @@ public class DashboardController implements Initializable {
     @FXML
     public void close(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
-        File user = new File("username.txt");
-        File Pass = new File("password.txt");
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File user = new File(user_path + ".txt");
+        String pass_path = System.getProperty("user.home") + File.separator + ".config";
+        pass_path += File.separator + "password";
+        File Pass = new File(pass_path + ".txt");
         if (user.exists() && Pass.exists()) {
             user.delete();
             Pass.delete();
@@ -176,7 +179,9 @@ public class DashboardController implements Initializable {
 
     /* FETCHING */
     public void fetch() {
-        File file = new File("username.txt");
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File file = new File(user_path + ".txt");
         try {
             Connection connection = DBConnect.Embadded();
             Scanner input = new Scanner(file);

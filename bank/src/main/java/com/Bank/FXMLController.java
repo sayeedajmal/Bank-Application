@@ -12,10 +12,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,10 +61,14 @@ public class FXMLController implements Initializable {
         // Convert USRENAME TO String and PASSWORD to String
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        File text_user = new File("username.txt");
-        FileWriter fileWriter = new FileWriter(text_user);
-        File text_password = new File("password.txt");
-        FileWriter fileWriter2 = new FileWriter(text_password);
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File user = new File(user_path + ".txt");
+        FileWriter fileWriter = new FileWriter(user);
+        String pass_path = System.getProperty("user.home") + File.separator + ".config";
+        pass_path += File.separator + "password";
+        File pass = new File(pass_path + ".txt");
+        FileWriter fileWriter2 = new FileWriter(pass);
         fileWriter2.append(PASSWORD);
         fileWriter.append(USERNAME.toUpperCase());
         fileWriter.close();

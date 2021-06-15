@@ -31,8 +31,12 @@ public class withdrawal implements Initializable {
 
     @FXML
     public void withdraw(ActionEvent event) {
-        File user = new File("username.txt");
-        File Pass = new File("password.txt");
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File user = new File(user_path + ".txt");
+        String pass_path = System.getProperty("user.home") + File.separator + ".config";
+        pass_path += File.separator + "password";
+        File Pass = new File(pass_path + ".txt");
         try {
             Scanner password = new Scanner(Pass);
             while (password.hasNext()) {
@@ -78,7 +82,9 @@ public class withdrawal implements Initializable {
     }
 
     public void fetch() {
-        File file = new File("username.txt");
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File file = new File(user_path + ".txt");
         try {
             Connection connection = DBConnect.Embadded();
             Scanner input = new Scanner(file);
