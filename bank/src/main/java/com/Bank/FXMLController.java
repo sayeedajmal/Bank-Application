@@ -27,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -45,6 +46,7 @@ public class FXMLController implements Initializable {
     public JFXPasswordField login_password = new JFXPasswordField();
     public JFXTextField account = new JFXTextField();
     public JFXTextField ifsc = new JFXTextField();
+    public Label notfound;
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
     Connection connection = DBConnect.Embadded();
@@ -108,7 +110,7 @@ public class FXMLController implements Initializable {
                 System.out.println("Oooops! Username or password is invalid!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            notfound.setText("User Not Found");
         }
 
     }
