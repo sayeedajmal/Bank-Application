@@ -49,7 +49,6 @@ public class withdrawal implements Initializable {
                 ResultSet resultSet = statement.getResultSet();
                 while (resultSet.next()) {
                     ammount = resultSet.getInt("AMMOUNT");
-                    /* Adding The Money */
                     String Password = password.next();
                     Scanner input = new Scanner(user);
                     while (input.hasNext()) {
@@ -58,11 +57,16 @@ public class withdrawal implements Initializable {
                                 + " '";
                         String update_ammount = withdrawammount.getText();
                         int change_int = Integer.parseInt(update_ammount);
-                        int subtract = ammount - change_int;
-                        PreparedStatement preparedStatement = connection.prepareStatement(fetch);
-                        preparedStatement.setInt(1, subtract);
-                        preparedStatement.executeUpdate();
-                        No(event);
+                        if (ammount >= change_int) {
+                            int subtract = ammount - change_int;
+                            PreparedStatement preparedStatement = connection.prepareStatement(fetch);
+                            preparedStatement.setInt(1, subtract);
+                            preparedStatement.executeUpdate();
+                            No(event);
+                            System.out.println("Yes.. YOu Done WithDrawal");
+                        } else {
+                            System.out.println("Nope");
+                        }
                     }
                     input.close();
                 }
@@ -70,10 +74,11 @@ public class withdrawal implements Initializable {
             }
             password.close();
 
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             e.printStackTrace();
         }
-        System.out.println("WithDrawn Your Ammount");
     }
 
     @FXML
