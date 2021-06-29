@@ -26,6 +26,7 @@ public class withdrawal implements Initializable {
     public Label NUMBER = new Label();
     public Label AMMOUNT = new Label();
     public Label IFSC = new Label();
+    public Label notsufficient = new Label();
     Stage window = new Stage();
     String uname;
 
@@ -66,6 +67,9 @@ public class withdrawal implements Initializable {
                             System.out.println("Yes.. YOu Done WithDrawal");
                         } else {
                             System.out.println("Nope");
+                            withdrawammount.setText(null);
+                            notsufficient.setText("Ammount is Not Sufficient for WithDraw!");
+
                         }
                     }
                     input.close();

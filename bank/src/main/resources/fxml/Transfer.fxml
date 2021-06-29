@@ -34,7 +34,7 @@
                   <Font name="Lato Regular" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="288.0" layoutY="371.0" prefHeight="52.0" prefWidth="166.0" ripplerFill="#00ff2f" style="-fx-background-radius: 20px 0px 20px 0px; -fx-background-color: #078474;" text="Ready !" textFill="WHITE">
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="288.0" layoutY="371.0" onAction="#Ready" prefHeight="52.0" prefWidth="166.0" ripplerFill="#00ff2f" style="-fx-background-radius: 20px 0px 20px 0px; -fx-background-color: #078474;" text="Ready !" textFill="WHITE">
                <font>
                   <Font name="Georgia" size="26.0" />
                </font>
