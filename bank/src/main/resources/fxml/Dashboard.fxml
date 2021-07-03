@@ -159,7 +159,7 @@
                   <Font name="P052-Bold" size="19.0" />
                </font>
             </Label>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1046.0" layoutY="2.0" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1046.0" layoutY="2.0" onAction="#Setting" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>

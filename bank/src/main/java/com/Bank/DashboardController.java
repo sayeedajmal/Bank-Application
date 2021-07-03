@@ -144,6 +144,24 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    public void Setting(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/CloseAccount.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("WithDraw");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
     public void minimize(ActionEvent event) {
 
     }
