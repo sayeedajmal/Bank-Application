@@ -64,7 +64,7 @@ public class withdrawal implements Initializable {
                             preparedStatement.setInt(1, subtract);
                             preparedStatement.executeUpdate();
                             No(event);
-                            System.out.println("Yes.. YOu Done WithDrawal");
+                            System.out.println("Yes..Done WithDrawal");
                         } else {
                             System.out.println("Nope");
                             withdrawammount.setText(null);
