@@ -1,6 +1,5 @@
 package com.Bank;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,11 +9,7 @@ import java.sql.Statement;
 public class DBConnect {
 
     public static Connection Embadded() throws SQLException {
-        String path = System.getProperty("user.home") + File.separator + ".config";
-        path += File.separator + "database";
-        File file = new File(path);
-        String databaseURL = "jdbc:derby:" + file + ";create=true";
-        Connection connection = DriverManager.getConnection(databaseURL);
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost/BANK", "root", "PERSONAL");
         return connection;
     }
 
