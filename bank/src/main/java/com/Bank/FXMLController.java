@@ -1,11 +1,15 @@
 package com.Bank;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -23,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -31,39 +36,46 @@ import javafx.stage.StageStyle;
 
 public class FXMLController implements Initializable {
     public AnchorPane dashpane;
-    public JFXTextField username;
+    public JFXTextField username = new JFXTextField();
+    public JFXTextField login_username = new JFXTextField();
     public JFXDatePicker birthdate = new JFXDatePicker();
     public JFXComboBox<String> gender = new JFXComboBox<>();
-    public JFXTextField email;
-    public JFXTextField phone;
-    public JFXPasswordField password;
+    public JFXTextField email = new JFXTextField();
+    public JFXTextField phone = new JFXTextField();
+    public JFXPasswordField password = new JFXPasswordField();
+    public JFXPasswordField login_password = new JFXPasswordField();
+    public JFXTextField account = new JFXTextField();
+    public JFXTextField ifsc = new JFXTextField();
+    public Label notfound;
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
-    Connection connection = null;
+    Connection connection = DBConnect.Embadded();
     PreparedStatement preparedStatement = null;
     ResultSet resultSet = null;
 
-    public FXMLController() throws SQLException {
-        connection = DBConnect.Connection();
-    }
-
-    /* REQUESTING FOCUS OF KEYBOARD AND MOUSE OVER TEXTFIELD */
-    public void focus() {
-        username.requestFocus();
-        password.requestFocus();
-        /*
-         * email.requestFocus(); phone.requestFocus();
-         */
+    public FXMLController() throws SQLException, ClassNotFoundException {
+        connection = DBConnect.Embadded();
     }
 
     /* THIS SECTION IS FOR Access */
     @FXML
-    public void Access(ActionEvent event) throws IOException {
+    public void Access(ActionEvent event) throws IOException, SQLException {
         // Convert USRENAME TO String and PASSWORD to String
-        focus();
         String USERNAME = username.getText();
         String PASSWORD = password.getText();
-        String authentic = "SELECT * FROM USER WHERE USERNAME = ? and PASSWORD = ?";
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File user = new File(user_path + ".txt");
+        FileWriter fileWriter = new FileWriter(user);
+        String pass_path = System.getProperty("user.home") + File.separator + ".config";
+        pass_path += File.separator + "password";
+        File pass = new File(pass_path + ".txt");
+        FileWriter fileWriter2 = new FileWriter(pass);
+        fileWriter2.append(PASSWORD);
+        fileWriter.append(USERNAME.toUpperCase());
+        fileWriter.close();
+        fileWriter2.close();
+        String authentic = "SELECT * FROM " + username.getText().toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);
             preparedStatement.setString(1, USERNAME);
@@ -98,12 +110,12 @@ public class FXMLController implements Initializable {
                 System.out.println("Oooops! Username or password is invalid!");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            notfound.setText("User Not Found");
         }
 
     }
 
-    /* THIS SECTION IS FOR SIGNUP.. GETTING INFORMATION FROM USER */
+    /* THIS SECTION IS FOR LOADING THE REGISTER PAGE */
     @FXML
     public void signup(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -116,28 +128,44 @@ public class FXMLController implements Initializable {
         stage.initStyle(StageStyle.TRANSPARENT);
     }
 
+    /* THIS SECTION OS FOR REGISTERING NEW USERS..... */
     @FXML
     public void register(ActionEvent event) throws IOException, SQLException {
+
+        if (!doesTableExists(username.getText().toUpperCase(), connection)) {
+            String users_create = "create table " + username.getText().toUpperCase() + " ( "
+                    + "username varchar(20) not null, birthdate varchar(20) not null,gender varchar(8) not null,account varchar(20) not null,ifsc varchar(15),email varchar(30), phone varchar(20) not null, password varchar(10),ammount integer ,primary key(account)"
+                    + " )";
+            Statement statement = connection.createStatement();
+            statement.execute(users_create);
+            System.out.println("Created table USERS.");
+        } else {
+            System.out.println("User table Already Exists");
+        }
         String USERNAME = username.getText();
-        String PASSWORD = password.getText();
-        String PHONE = phone.getText();
-        String EMAIL = email.getText();
         LocalDate date = birthdate.getValue();
         String BIRTHDATE = date.toString();
         String GENDER = gender.getValue();
+        String ACCOUNT = account.getText();
+        String IFSC = ifsc.getText();
+        String EMAIL = email.getText();
+        String PHONE = phone.getText();
+        String PASSWORD = password.getText();
 
-        String insert = "INSERT INTO USER(USERNAME,PASSWORD,PHONE,EMAIL,BIRTHDATE,GENDER) VALUES(?,?,?,?,?,?)";
+        String insert = "insert into " + username.getText().toUpperCase() + " values (?,?,?,?,?,?,?,?,20)";
 
         preparedStatement = connection.prepareStatement(insert);
         preparedStatement.setString(1, USERNAME);
-        preparedStatement.setString(2, PASSWORD);
-        preparedStatement.setString(3, PHONE);
-        preparedStatement.setString(4, EMAIL);
-        preparedStatement.setString(5, BIRTHDATE);
-        preparedStatement.setString(6, GENDER);
+        preparedStatement.setString(2, BIRTHDATE);
+        preparedStatement.setString(3, GENDER);
+        preparedStatement.setString(4, ACCOUNT);
+        preparedStatement.setString(5, IFSC);
+        preparedStatement.setString(6, EMAIL);
+        preparedStatement.setString(7, PHONE);
+        preparedStatement.setString(8, PASSWORD);
 
-        if (!USERNAME.isBlank() && !PASSWORD.isBlank() && !PHONE.isBlank() && !EMAIL.isBlank() && !BIRTHDATE.isBlank()
-                && !GENDER.isBlank()) {
+        if (!USERNAME.isBlank() && !PASSWORD.isBlank() && !ACCOUNT.isBlank() && !IFSC.isBlank() && !PHONE.isBlank()
+                && !EMAIL.isBlank() && !BIRTHDATE.isBlank() && !GENDER.isBlank()) {
             preparedStatement.executeUpdate();
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
             Scene scene = new Scene(root);
@@ -156,7 +184,13 @@ public class FXMLController implements Initializable {
         } else {
             System.out.println("Fill All Fields");
         }
+    }
 
+    /* CREATING METHOD FOR KNOWING "USERs" TABLE ARE EXIST ARE NOT */
+    public static boolean doesTableExists(String tableName, Connection connection) throws SQLException {
+        DatabaseMetaData meta = connection.getMetaData();
+        ResultSet resultSet = meta.getTables(null, null, tableName.toUpperCase(), null);
+        return resultSet.next();
     }
 
     @FXML

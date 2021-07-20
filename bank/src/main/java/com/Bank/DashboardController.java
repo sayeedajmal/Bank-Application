@@ -1,13 +1,21 @@
 package com.Bank;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.Scanner;
+
+import com.jfoenix.controls.JFXTextField;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +46,9 @@ public class DashboardController implements Initializable {
     public Label NAME = new Label();
     public Label NUMBER = new Label();
     public Label AMMOUNT = new Label();
+    public Label IFSC = new Label();
+    String uname;
+    public JFXTextField depositeammount = new JFXTextField();
 
     /* THIS SECTION IS FOR PIE PieChart */
     ObservableList<PieChart.Data> Data = FXCollections.observableArrayList(new PieChart.Data("Clothes", 16.66),
@@ -97,13 +108,100 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    public void depositebutton(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Deposite.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("Deposite");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    @FXML
+    public void withdrawbutton(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/withdrawal.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("WithDraw");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    @FXML
+    public void Setting(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/CloseAccount.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("WithDraw");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+
+    @FXML
     public void minimize(ActionEvent event) {
 
     }
 
     @FXML
+    public void Ready(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/TransferDone.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image Icon = new Image("/Images/user.png");
+        stage.getIcons().add(Icon);
+        stage.setTitle("Transfer");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.showAndWait();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    @FXML
     public void No(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+    }
+
+    @FXML
+    public void close(ActionEvent event) {
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File user = new File(user_path + ".txt");
+        String pass_path = System.getProperty("user.home") + File.separator + ".config";
+        pass_path += File.separator + "password";
+        File Pass = new File(pass_path + ".txt");
+        if (user.exists() && Pass.exists()) {
+            user.delete();
+            Pass.delete();
+        }
     }
 
     /* THIS IS THE TABLE VIEW FOR MiniTransactions */
@@ -114,6 +212,55 @@ public class DashboardController implements Initializable {
     public TableColumn<MiniTransaction, String> Payment = new TableColumn<>();
     public TableColumn<MiniTransaction, Integer> Ammount = new TableColumn<>();
     /* SHOWING NAME ACCOUNT NUMBER & AMMOUNT */
+
+    /* FETCHING */
+    public void fetch() {
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File file = new File(user_path + ".txt");
+        try {
+            Connection connection = DBConnect.Embadded();
+            Scanner input = new Scanner(file);
+            while (input.hasNext()) {
+                uname = input.next();
+                String query = "select * from " + uname.toUpperCase();
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    NAME.setText(resultSet.getString("username"));
+                    NUMBER.setText(resultSet.getString("account"));
+                    AMMOUNT.setText(resultSet.getString("ammount"));
+                    IFSC.setText(resultSet.getString("ifsc"));
+                } else {
+                    System.out.println("I can't Think About That");
+                }
+            }
+            input.close();
+        } catch (FileNotFoundException | SQLException e) {
+            e.printStackTrace();
+            System.out.println("fuck it");
+        }
+    }
+
+    /* Refresh Button */
+    public void refresh(ActionEvent event) throws InterruptedException, IOException {
+        No(event);
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Dashboard.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        scene.getStylesheets().add("/styles/Styles.css");
+        Image icon = new Image("/Images/account.png");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Dashboard");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.centerOnScreen();
+        stage.getIcons().add(icon);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        fetch();
+    }
 
     @Override
     /* <<=============== This SECTION is for Initialize =================>> */
@@ -145,18 +292,8 @@ public class DashboardController implements Initializable {
         tableview.setItems(list);
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
-        try {
-            Connection connection = DBConnect.Connection();
-            ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM ACCOUNTS");
-            /* while (resultSet.next()) { */
-            if (resultSet.next()) {
-                NAME.setText(resultSet.getString("NAME"));
-                NUMBER.setText(resultSet.getString("NUMBER"));
-                AMMOUNT.setText(resultSet.getString("AMMOUNT"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        /* FETCHING DATA FROM THE DATABASE */
+        fetch();
     }
+
 }

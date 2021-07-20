@@ -1,3 +1,7 @@
+derby.log
+/database
+Bank/target
+Db_Test
+username.txt
+password.txt
 .vscode
-database
-target/classes

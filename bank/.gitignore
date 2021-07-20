@@ -1,4 +1,5 @@
 target
 Test
+.vscode
 target/classes
 target

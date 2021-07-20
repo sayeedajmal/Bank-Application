@@ -2,9 +2,10 @@
 
 - This is A Banking Application Developed by @SAYEEDAJMAL.
 
-- This Application will run on Localhost Server with the help of Mysql Database. And ALso Designed for Embadded Database.
+- This Application will run on Localhost Server with the help of Mysql Databvase. And Also Designed for Embadded Database.
 
 ## BRANCHES
 
-1. MASTER <===>It Run on Localhost Server. Which includes Mysql Database.
-2. Embadded <===>It Run on Embadded Database.
+1. MASTER <===> It Run on Localhost Host Server. Which Includes Mysql Database.
+
+2. Embadded <===> It Run On Embadded Database.
