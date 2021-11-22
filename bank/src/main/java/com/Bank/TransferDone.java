@@ -88,7 +88,6 @@ public class TransferDone implements Initializable {
                             return;
                         }
                     } else {
-                        System.out.println("Username not matched");
                         information.setText("USERNAME not Matched");
                         temp_name.setText(null);
                         return;

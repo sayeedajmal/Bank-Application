@@ -16,7 +16,7 @@
    <children>
       <ImageView cache="true" fitHeight="640.0" fitWidth="360.0" pickOnBounds="true" rotate="180.0" style="-fx-opacity: 0.5;">
          <image>
-            <Image url="@../Images/Signup.jpg" />
+            <Image url="@../Images/download.png" />
          </image>
       </ImageView>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="35.0" prefHeight="51.0" prefWidth="234.0" text="Registration Info" textFill="WHITE" underline="true" wrapText="true">

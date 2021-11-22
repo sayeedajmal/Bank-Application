@@ -166,23 +166,7 @@ public class DashboardController implements Initializable {
 
     }
 
-    @FXML
-    public void Ready(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/TransferDone.fxml"));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        Image Icon = new Image("/Images/user.png");
-        stage.getIcons().add(Icon);
-        stage.setTitle("Transfer");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.centerOnScreen();
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.showAndWait();
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
-    }
+    
 
     @FXML
     public void No(ActionEvent event) {
