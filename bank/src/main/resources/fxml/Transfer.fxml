@@ -95,7 +95,7 @@
                   <Font name="Fira Code Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="information" alignment="CENTER" layoutX="159.0" layoutY="322.0" prefHeight="40.0" prefWidth="424.0" text="USERNAME IS RONG" textFill="RED">
+            <Label fx:id="information" alignment="CENTER" layoutX="159.0" layoutY="322.0" prefHeight="40.0" prefWidth="424.0" textFill="RED">
                <font>
                   <Font name="Bitstream Vera Serif Bold" size="14.0" />
                </font>

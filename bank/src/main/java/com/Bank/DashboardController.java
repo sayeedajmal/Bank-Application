@@ -10,12 +10,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,6 +37,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class DashboardController implements Initializable {
     public Label time = new Label();
@@ -166,8 +169,6 @@ public class DashboardController implements Initializable {
 
     }
 
-    
-
     @FXML
     public void No(ActionEvent event) {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
@@ -197,36 +198,6 @@ public class DashboardController implements Initializable {
     public TableColumn<MiniTransaction, Integer> Ammount = new TableColumn<>();
     /* SHOWING NAME ACCOUNT NUMBER & AMMOUNT */
 
-    /* FETCHING */
-    public void fetch() {
-        String user_path = System.getProperty("user.home") + File.separator + ".config";
-        user_path += File.separator + "username";
-        File file = new File(user_path + ".txt");
-        try {
-            Connection connection = DBConnect.Embadded();
-            Scanner input = new Scanner(file);
-            while (input.hasNext()) {
-                uname = input.next();
-                String query = "select * from " + uname.toUpperCase();
-                Statement statement = connection.createStatement();
-                statement.execute(query);
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    NAME.setText(resultSet.getString("username"));
-                    NUMBER.setText(resultSet.getString("account"));
-                    AMMOUNT.setText(resultSet.getString("ammount"));
-                    IFSC.setText(resultSet.getString("ifsc"));
-                } else {
-                    System.out.println("I can't Think About That");
-                }
-            }
-            input.close();
-        } catch (FileNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("fuck it");
-        }
-    }
-
     /* Refresh Button */
     public void refresh(ActionEvent event) throws InterruptedException, IOException {
         No(event);
@@ -243,21 +214,29 @@ public class DashboardController implements Initializable {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-        fetch();
     }
 
     @Override
     /* <<=============== This SECTION is for Initialize =================>> */
     public void initialize(URL location, ResourceBundle resources) {
+
         /* <<=============== Getting Time And Date =================>> */
-        LocalTime ltime = LocalTime.now();
-        DateTimeFormatter lTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
-        String LTime = ltime.format(lTimeFormatter);
-        time.setText(LTime);
-        LocalDate ldate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String lDate = ldate.format(formatter);
-        date.setText(lDate);
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalTime currentTime = LocalTime.now();
+            time.setText(currentTime.getHour() + ":" + currentTime.getMinute() + ":" + currentTime.getSecond());
+        }), new KeyFrame(Duration.seconds(1)));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
+
+        LocalDate currentDate = LocalDate.now();
+        Timeline Day = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            String lDate = currentDate.getDayOfMonth() + ":" + currentDate.getMonthValue() + ":"
+                    + currentDate.getYear();
+            date.setText(lDate);
+        }), new KeyFrame(Duration.seconds(1)));
+        Day.setCycleCount(Animation.INDEFINITE);
+        Day.play();
+        String lDate = currentDate.toString();
         /* <<=============== ----------------------- =================>> */
         /* ObservableList for Adding Informations */
         ObservableList<MiniTransaction> list = FXCollections.observableArrayList(
@@ -276,8 +255,45 @@ public class DashboardController implements Initializable {
         tableview.setItems(list);
         /* <<=============== Getting Time And Date =================>> */
         expensepie.setData(Data);
+
+        /* ====================================================================== */
         /* FETCHING DATA FROM THE DATABASE */
-        fetch();
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File file = new File(user_path + ".txt");
+        try {
+            Connection connection = DBConnect.Embadded();
+            Scanner input = new Scanner(file);
+            while (input.hasNext()) {
+                uname = input.next();
+                String query = "select * from " + uname.toUpperCase();
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    NAME.setText(resultSet.getString("username"));
+                    NUMBER.setText(resultSet.getString("account"));
+
+                    Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                        try {
+                            AMMOUNT.setText(resultSet.getString("ammount"));
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                    }), new KeyFrame(Duration.seconds(1)));
+                    FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+                    FetchingAmmount.play();
+                    IFSC.setText(resultSet.getString("ifsc"));
+                } else {
+                    System.out.println("I can't Think About That");
+                }
+            }
+            input.close();
+        } catch (FileNotFoundException | SQLException e) {
+            e.printStackTrace();
+            System.out.println("fuck it");
+        }
+        /* =========================================================== */
     }
 
 }

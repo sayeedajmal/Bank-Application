@@ -14,12 +14,16 @@ import java.util.Scanner;
 
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class deposite implements Initializable {
     public JFXTextField depositeammount;
@@ -97,8 +101,16 @@ public class deposite implements Initializable {
                 if (resultSet.next()) {
                     NAME.setText(resultSet.getString("username"));
                     NUMBER.setText(resultSet.getString("account"));
-                    AMMOUNT.setText(resultSet.getString("ammount"));
                     IFSC.setText(resultSet.getString("ifsc"));
+                    Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                        try {
+                            AMMOUNT.setText(resultSet.getString("ammount"));
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                    }), new KeyFrame(Duration.seconds(1)));
+                    FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+                    FetchingAmmount.play();
                 } else {
                     System.out.println("I can't Think About That");
                 }

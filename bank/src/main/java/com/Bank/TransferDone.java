@@ -1,5 +1,7 @@
 package com.Bank;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -7,10 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class TransferDone implements Initializable {
     public Label NAME = new Label();
@@ -34,7 +41,7 @@ public class TransferDone implements Initializable {
     public JFXTextField temp_ifsc = new JFXTextField();
     public JFXTextField temp_number1 = new JFXTextField();
     public Label information = new Label();
-    String uname = new String();
+    String uname;
 
     @FXML
     public void Ready(ActionEvent event) throws IOException {
@@ -82,7 +89,6 @@ public class TransferDone implements Initializable {
                             stage.showAndWait();
                             ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
                         } else {
-                            System.out.println("IFSC Not Matched");
                             information.setText("IFSC code not Matched");
                             temp_ifsc.setText(null);
                             return;
@@ -93,14 +99,12 @@ public class TransferDone implements Initializable {
                         return;
                     }
                 } else {
-                    System.out.println("Account Not Matched / Given account number not found");
                     information.setText("Account Number not Matched");
                     temp_number1.setText(null);
                     return;
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Information Doestn't Exist");
             information.setText("Provided Infromation Doesn't Exist");
             temp_name.setText(null);
             temp_ifsc.setText(null);
@@ -120,16 +124,43 @@ public class TransferDone implements Initializable {
         ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
     }
 
-    @FXML
-    public void Fetch() {
-        String String_name = temp_name.getText();
-        System.out.println(String_name);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String String_name = temp_name.getText();
-        NAME.setText(String_name);
+
+        String user_path = System.getProperty("user.home") + File.separator + ".config";
+        user_path += File.separator + "username";
+        File file = new File(user_path + ".txt");
+        try {
+            Connection connection = DBConnect.Embadded();
+            Scanner input = new Scanner(file);
+            while (input.hasNext()) {
+                uname = input.next();
+                String query = "select * from " + uname.toUpperCase();
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+                ResultSet resultSet = statement.getResultSet();
+                if (resultSet.next()) {
+                    NAME.setText(resultSet.getString("username"));
+                    NUMBER.setText(resultSet.getString("account"));
+
+                    Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                        try {
+                            AMMOUNT.setText(resultSet.getString("ammount"));
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                    }), new KeyFrame(Duration.seconds(1)));
+                    FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+                    FetchingAmmount.play();
+                } else {
+                    System.out.println("I can't Think About That");
+                }
+            }
+            input.close();
+        } catch (FileNotFoundException | SQLException e) {
+            e.printStackTrace();
+            System.out.println("fuck it");
+        }
     }
 
 }
