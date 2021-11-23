@@ -269,24 +269,26 @@ public class DashboardController implements Initializable {
                 String query = "select * from " + uname.toUpperCase();
                 Statement statement = connection.createStatement();
                 statement.execute(query);
-                ResultSet resultSet = statement.getResultSet();
-                if (resultSet.next()) {
-                    NAME.setText(resultSet.getString("username"));
-                    NUMBER.setText(resultSet.getString("account"));
 
-                    Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-                        try {
+                Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                    try {
+                        ResultSet resultSet = statement.getResultSet();
+                        if (resultSet.next()) {
+                            NAME.setText(resultSet.getString("username"));
+                            NUMBER.setText(resultSet.getString("account"));
                             AMMOUNT.setText(resultSet.getString("ammount"));
-                        } catch (SQLException e1) {
-                            e1.printStackTrace();
+                            IFSC.setText(resultSet.getString("ifsc"));
+                        } else {
+                            System.out.println("I can't Think About That");
                         }
-                    }), new KeyFrame(Duration.seconds(1)));
-                    FetchingAmmount.setCycleCount(Animation.INDEFINITE);
-                    FetchingAmmount.play();
-                    IFSC.setText(resultSet.getString("ifsc"));
-                } else {
-                    System.out.println("I can't Think About That");
-                }
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+
+                }), new KeyFrame(Duration.seconds(1)));
+                FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+                FetchingAmmount.play();
+
             }
             input.close();
         } catch (FileNotFoundException | SQLException e) {

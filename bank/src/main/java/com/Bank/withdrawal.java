@@ -39,52 +39,47 @@ public class withdrawal implements Initializable {
         String user_path = System.getProperty("user.home") + File.separator + ".config";
         user_path += File.separator + "username";
         File user = new File(user_path + ".txt");
-        String pass_path = System.getProperty("user.home") + File.separator + ".config";
-        pass_path += File.separator + "password";
-        File Pass = new File(pass_path + ".txt");
         try {
-            Scanner password = new Scanner(Pass);
-            while (password.hasNext()) {
-                Connection connection = DBConnect.Embadded();
-                /* Fetching the Ammount */
-                String query = "SELECT AMMOUNT FROM " + uname.toUpperCase();
-                Integer ammount;
-                Statement statement = connection.createStatement();
-                statement.executeQuery(query);
-                ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    ammount = resultSet.getInt("AMMOUNT");
-                    String Password = password.next();
-                    Scanner input = new Scanner(user);
-                    while (input.hasNext()) {
+
+            Connection connection = DBConnect.Embadded();
+            /* Fetching the Ammount */
+            String query = "SELECT * FROM " + uname.toUpperCase();
+            Integer ammount;
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query);
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                ammount = resultSet.getInt("AMMOUNT");
+                String Account = resultSet.getString("account");
+
+                Scanner input = new Scanner(user);
+                while (input.hasNext()) {
+
+                    String update_ammount = withdrawammount.getText();
+                    int change_int = Integer.parseInt(update_ammount);
+
+                    if (ammount >= change_int) {
                         uname = input.next();
-                        String fetch = "update " + uname.toUpperCase() + " set ammount=? WHERE password='" + Password
-                                + " '";
-                        String update_ammount = withdrawammount.getText();
-                        int change_int = Integer.parseInt(update_ammount);
-                        if (ammount >= change_int) {
-                            int subtract = ammount - change_int;
-                            PreparedStatement preparedStatement = connection.prepareStatement(fetch);
-                            preparedStatement.setInt(1, subtract);
-                            preparedStatement.executeUpdate();
-                            No(event);
-                            System.out.println("Yes..Done WithDrawal");
-                        } else {
-                            System.out.println("Nope");
-                            withdrawammount.setText(null);
-                            notsufficient.setText("Ammount is Not Sufficient for WithDraw!");
+                        ammount -= change_int;
 
-                        }
+                        String Query = "UPDATE " + uname.toUpperCase() + " SET AMMOUNT=" + ammount + " WHERE ACCOUNT ="
+                                + Account;
+                        PreparedStatement preparedStatement = connection.prepareStatement(Query);
+                        preparedStatement.executeUpdate(Query);
+                        No(event);
+                        System.out.println("Yes..Done WithDrawal");
+                        
+                    } else {
+                        System.out.println("Nope");
+                        withdrawammount.setText(null);
+                        notsufficient.setText("Ammount is Not Sufficient for WithDraw!");
+
                     }
-                    input.close();
                 }
-
+                input.close();
             }
-            password.close();
 
-        } catch (
-
-        Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
