@@ -14,12 +14,16 @@ import java.util.Scanner;
 
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class deposite implements Initializable {
     public JFXTextField depositeammount;
@@ -34,46 +38,41 @@ public class deposite implements Initializable {
         String user_path = System.getProperty("user.home") + File.separator + ".config";
         user_path += File.separator + "username";
         File user = new File(user_path + ".txt");
-        String pass_path = System.getProperty("user.home") + File.separator + ".config";
-        pass_path += File.separator + "password";
-        File Pass = new File(pass_path + ".txt");
         try {
-            Scanner password = new Scanner(Pass);
-            while (password.hasNext()) {
-                Connection connection = DBConnect.Embadded();
-                /* Fetching the Ammount */
-                String query = "SELECT AMMOUNT FROM " + uname.toUpperCase();
-                Integer ammount;
-                Statement statement = connection.createStatement();
-                statement.executeQuery(query);
-                ResultSet resultSet = statement.getResultSet();
-                while (resultSet.next()) {
-                    ammount = resultSet.getInt("AMMOUNT");
-                    /* Adding The Money */
-                    String Password = password.next();
-                    Scanner input = new Scanner(user);
-                    while (input.hasNext()) {
-                        uname = input.next();
-                        String fetch = "update " + uname.toUpperCase() + " set ammount=? WHERE password='" + Password
-                                + " '";
-                        String update_ammount = depositeammount.getText();
-                        int change_int = Integer.parseInt(update_ammount);
-                        int adding = ammount + change_int;
-                        PreparedStatement preparedStatement = connection.prepareStatement(fetch);
-                        preparedStatement.setInt(1, adding);
-                        preparedStatement.executeUpdate();
-                        No(event);
-                    }
-                    input.close();
-                }
 
+            Connection connection = DBConnect.Embadded();
+            /* Fetching the Ammount */
+            String query = "SELECT * FROM " + uname.toUpperCase();
+            Integer ammount;
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query);
+            ResultSet resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                ammount = resultSet.getInt("AMMOUNT");
+                String Account = resultSet.getString("account");
+                Scanner input = new Scanner(user);
+                while (input.hasNext()) {
+
+                    String update_ammount = depositeammount.getText();
+                    int change_int = Integer.parseInt(update_ammount);
+
+                    uname = input.next();
+                    ammount += change_int;
+
+                    String Query = "UPDATE " + uname.toUpperCase() + " SET AMMOUNT=" + ammount + " WHERE ACCOUNT ="
+                            + Account;
+                    PreparedStatement preparedStatement = connection.prepareStatement(Query);
+                    preparedStatement.executeUpdate(Query);
+                    No(event);
+                    System.out.println("Yes..Done Deposite");
+                }
+                input.close();
             }
-            password.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Deposited Your Ammount");
+
     }
 
     @FXML
@@ -97,8 +96,16 @@ public class deposite implements Initializable {
                 if (resultSet.next()) {
                     NAME.setText(resultSet.getString("username"));
                     NUMBER.setText(resultSet.getString("account"));
-                    AMMOUNT.setText(resultSet.getString("ammount"));
                     IFSC.setText(resultSet.getString("ifsc"));
+                    Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                        try {
+                            AMMOUNT.setText(resultSet.getString("ammount"));
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                    }), new KeyFrame(Duration.seconds(1)));
+                    FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+                    FetchingAmmount.play();
                 } else {
                     System.out.println("I can't Think About That");
                 }

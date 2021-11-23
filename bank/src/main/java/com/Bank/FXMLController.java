@@ -66,15 +66,9 @@ public class FXMLController implements Initializable {
         String user_path = System.getProperty("user.home") + File.separator + ".config";
         user_path += File.separator + "username";
         File user = new File(user_path + ".txt");
-        FileWriter fileWriter = new FileWriter(user);
-        String pass_path = System.getProperty("user.home") + File.separator + ".config";
-        pass_path += File.separator + "password";
-        File pass = new File(pass_path + ".txt");
-        FileWriter fileWriter2 = new FileWriter(pass);
-        fileWriter2.append(PASSWORD);
+        FileWriter fileWriter = new FileWriter(user);    
         fileWriter.append(USERNAME.toUpperCase());
         fileWriter.close();
-        fileWriter2.close();
         String authentic = "SELECT * FROM " + username.getText().toUpperCase() + " WHERE USERNAME = ? and PASSWORD = ?";
         try {
             preparedStatement = connection.prepareStatement(authentic);

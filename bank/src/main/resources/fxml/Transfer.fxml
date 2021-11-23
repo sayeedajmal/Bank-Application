@@ -10,26 +10,26 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="800.0" style="-fx-border-color: #006064; -fx-border-width: 7px; -fx-background-color: #EEEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="800.0" style="-fx-border-color: #006064; -fx-border-width: 7px; -fx-background-color: #EEEEEE;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.TransferDone">
    <children>
       <Pane layoutX="30.0" layoutY="19.0" prefHeight="446.0" prefWidth="741.0" style="-fx-background-color: #ffffff; -fx-background-radius: 50px;">
          <children>
-            <JFXTextField alignment="CENTER" labelFloat="true" layoutX="107.0" layoutY="158.0" prefHeight="26.0" prefWidth="220.0" promptText="Enter Customer's Name" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
+            <JFXTextField fx:id="temp_name" alignment="CENTER" labelFloat="true" layoutX="107.0" layoutY="158.0" prefHeight="26.0" prefWidth="220.0" promptText="Enter Customer's Name" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
                <font>
                   <Font name="Lato Regular" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField alignment="CENTER" labelFloat="true" layoutX="521.0" layoutY="158.0" prefHeight="28.0" prefWidth="206.0" promptText="Account Number" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
+            <JFXTextField fx:id="temp_number" alignment="CENTER" labelFloat="true" layoutX="521.0" layoutY="158.0" prefHeight="28.0" prefWidth="206.0" promptText="Account Number" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
                <font>
                   <Font name="Lato Regular" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField alignment="CENTER" labelFloat="true" layoutX="143.0" layoutY="265.0" prefHeight="28.0" prefWidth="189.0" promptText="IFSC Code" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
+            <JFXTextField fx:id="temp_ifsc" alignment="CENTER" labelFloat="true" layoutX="143.0" layoutY="265.0" prefHeight="28.0" prefWidth="189.0" promptText="IFSC Code" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
                <font>
                   <Font name="Lato Regular" size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField alignment="CENTER" labelFloat="true" layoutX="526.0" layoutY="266.0" prefHeight="28.0" prefWidth="206.0" promptText="Re-Enter Account Number" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
+            <JFXTextField fx:id="temp_number1" alignment="CENTER" labelFloat="true" layoutX="526.0" layoutY="266.0" prefHeight="28.0" prefWidth="206.0" promptText="Re-Enter Account Number" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="BLACK">
                <font>
                   <Font name="Lato Regular" size="14.0" />
                </font>
@@ -93,6 +93,11 @@
             <Label alignment="CENTER" layoutX="358.0" layoutY="268.0" prefHeight="31.0" prefWidth="155.0" text="Re-Dial Number :" wrapText="true">
                <font>
                   <Font name="Fira Code Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="information" alignment="CENTER" layoutX="159.0" layoutY="322.0" prefHeight="40.0" prefWidth="424.0" textFill="RED">
+               <font>
+                  <Font name="Bitstream Vera Serif Bold" size="14.0" />
                </font>
             </Label>
          </children>

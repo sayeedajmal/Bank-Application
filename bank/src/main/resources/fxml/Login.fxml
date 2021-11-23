@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashpane" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.FXMLController">
+<AnchorPane fx:id="dashpane" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.FXMLController">
    <children>
-      <ImageView fitHeight="640.0" fitWidth="360.0" pickOnBounds="true">
+      <ImageView fitHeight="640.0" fitWidth="360.0" pickOnBounds="true" rotate="-180.0">
          <image>
-            <Image url="@../Images/luke-chesser-PHtp0cDBJSM-unsplash.jpg" />
+            <Image url="@../Images/download.png" />
          </image>
       </ImageView>
       <JFXTextField fx:id="username" alignment="CENTER" focusColor="BLACK" labelFloat="true" layoutX="47.0" layoutY="234.0" prefHeight="36.0" prefWidth="278.0" promptText="UserName" style="-fx-background-color: #fafafa; -fx-background-radius: 50px;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">

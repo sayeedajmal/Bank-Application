@@ -2,11 +2,9 @@ package com.Bank;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,7 +41,7 @@ public class CloseAccount implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
+       /*  try {
             Connection connection = DBConnect.Embadded();
             String query = "SELECT * FROM SAYEED";
             Statement statement = connection.createStatement();
@@ -51,7 +49,17 @@ public class CloseAccount implements Initializable {
             ResultSet resultSet = statement.getResultSet();
             if (resultSet.next()) {
                 NAME.setText(resultSet.getString("username"));
-                AMMOUNT.setText(resultSet.getString("ammount"));
+
+                Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                    try {
+                        AMMOUNT.setText(resultSet.getString("ammount"));
+                    } catch (SQLException e1) {
+                        e1.printStackTrace();
+                    }
+                }), new KeyFrame(Duration.seconds(1)));
+                FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+                FetchingAmmount.play();
+
                 IFSC.setText(resultSet.getString("ifsc"));
                 NUMBER.setText(resultSet.getString("account"));
             } else {
@@ -59,7 +67,7 @@ public class CloseAccount implements Initializable {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        } */
 
     }
 
