@@ -154,7 +154,7 @@ public class DashboardController implements Initializable {
         scene.getStylesheets().add("/styles/Styles.css");
         Image Icon = new Image("/Images/user.png");
         stage.getIcons().add(Icon);
-        stage.setTitle("WithDraw");
+        stage.setTitle("Settings");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.TRANSPARENT);
@@ -261,16 +261,16 @@ public class DashboardController implements Initializable {
         String user_path = System.getProperty("user.home") + File.separator + ".config";
         user_path += File.separator + "username";
         File file = new File(user_path + ".txt");
-        try {
-            Connection connection = DBConnect.Embadded();
-            Scanner input = new Scanner(file);
-            while (input.hasNext()) {
-                uname = input.next();
-                String query = "select * from " + uname.toUpperCase();
-                Statement statement = connection.createStatement();
-                statement.execute(query);
+        Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            try {
+                Connection connection = DBConnect.Embadded();
+                Scanner input = new Scanner(file);
+                while (input.hasNext()) {
+                    uname = input.next();
+                    String query = "select * from " + uname.toUpperCase();
+                    Statement statement = connection.createStatement();
+                    statement.execute(query);
 
-                Timeline FetchingAmmount = new Timeline(new KeyFrame(Duration.ZERO, e -> {
                     try {
                         ResultSet resultSet = statement.getResultSet();
                         if (resultSet.next()) {
@@ -278,23 +278,20 @@ public class DashboardController implements Initializable {
                             NUMBER.setText(resultSet.getString("account"));
                             AMMOUNT.setText(resultSet.getString("ammount"));
                             IFSC.setText(resultSet.getString("ifsc"));
-                        } else {
-                            System.out.println("I can't Think About That");
                         }
                     } catch (SQLException e1) {
                         e1.printStackTrace();
                     }
-
-                }), new KeyFrame(Duration.seconds(1)));
-                FetchingAmmount.setCycleCount(Animation.INDEFINITE);
-                FetchingAmmount.play();
-
+                }
+                input.close();
+            } catch (FileNotFoundException | SQLException e1) {
+                e1.printStackTrace();
+                System.out.println("fuck it");
             }
-            input.close();
-        } catch (FileNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("fuck it");
-        }
+        }), new KeyFrame(Duration.seconds(1)));
+        FetchingAmmount.setCycleCount(Animation.INDEFINITE);
+        FetchingAmmount.play();
+
         /* =========================================================== */
     }
 
