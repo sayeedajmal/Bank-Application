@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,9 +16,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.DashboardController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.DashboardController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
    </columnConstraints>
@@ -27,17 +29,17 @@
    <children>
       <AnchorPane prefHeight="653.0" prefWidth="1186.0" style="-fx-background-color: #eeee;" styleClass="darkmode" stylesheets="@../styles/Styles.css">
          <children>
-            <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="252.0" layoutY="27.0" pickOnBounds="true" smooth="false">
+            <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="252.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@../Images/account.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="482.0" layoutY="25.0" pickOnBounds="true" smooth="false">
+            <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="482.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@../Images/banking.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="663.0" layoutY="27.0" pickOnBounds="true" smooth="false">
+            <ImageView fitHeight="30.0" fitWidth="35.0" layoutX="663.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@../Images/transaction.png" />
                </image>
@@ -47,7 +49,7 @@
                   <Image url="@../Images/credit-card.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="34.0" fitWidth="57.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" smooth="false">
+            <ImageView fitHeight="34.0" fitWidth="57.0" layoutX="29.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
                   <Image url="@../Images/sbi.png" />
                </image>
@@ -57,7 +59,7 @@
                   <Font name="Georgia Bold" size="15.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" defaultButton="true" layoutX="292.0" layoutY="25.0" prefHeight="33.0" prefWidth="117.0" ripplerFill="RED" style="-fx-background-color: linear-gradient(to bottom,#d1913c, #ffd194);" text="My Account">
+            <JFXButton buttonType="RAISED" defaultButton="true" layoutX="292.0" layoutY="25.0" prefHeight="33.0" prefWidth="117.0" ripplerFill="RED" style="-fx-background-color: #078474 #078474;" text="My Account" textFill="WHITE">
                <font>
                   <Font name="Fira Code Bold" size="15.0" />
                </font>
@@ -65,17 +67,17 @@
                   <ColorAdjust />
                </effect>
             </JFXButton>
-            <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="CENTER" layoutX="520.0" layoutY="24.0" onAction="#Banking" prefHeight="31.0" prefWidth="100.0" ripplerFill="RED" style="-fx-background-color: linear-gradient(to bottom,#136a8a, #267871);" text="Banking" textFill="WHITE">
+            <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="CENTER" layoutX="520.0" layoutY="24.0" onAction="#Banking" prefHeight="31.0" prefWidth="100.0" ripplerFill="RED" style="-fx-background-color: #078474 #078474;" text="Banking" textFill="WHITE">
                <font>
                   <Font name="DejaVu Serif Condensed Bold Italic" size="17.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="RIGHT" layoutX="704.0" layoutY="27.0" prefHeight="30.0" prefWidth="136.0" ripplerFill="RED" style="-fx-background-color: linear-gradient(to bottom,#833ab4,#fd1d1d, #fcb045);" text="Transactions">
+            <JFXButton alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="RIGHT" layoutX="704.0" layoutY="25.0" prefHeight="33.0" prefWidth="136.0" ripplerFill="RED" style="-fx-background-color: #078474 #078474;" text="Transactions" textFill="WHITE">
                <font>
                   <Font name="Fira Code Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="935.0" layoutY="26.0" prefHeight="31.0" prefWidth="84.0" ripplerFill="RED" style="-fx-background-color: linear-gradient(to bottom,#feac5e,#c779d0, #4bc0c8);" text="Cards">
+            <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="935.0" layoutY="26.0" prefHeight="31.0" prefWidth="84.0" ripplerFill="RED" style="-fx-background-color: linear-gradient(to left,#feac5e,#c779d0, #4bc0c8);" text="Cards" textFill="WHITE">
                <font>
                   <Font name="Fira Code Bold" size="15.0" />
                </font>
@@ -112,17 +114,24 @@
                         <Font name="Fira Code Regular" size="19.0" />
                      </font>
                   </Label>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="31.0" layoutY="166.0" onAction="#Transfer" prefHeight="52.0" prefWidth="166.0" ripplerFill="#031707" style="-fx-background-radius: 10px; -fx-background-color: #078474; -fx-border-color: red; -fx-border-radius: 10px;" text="Transfer Money" textFill="WHITE">
+                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="31.0" layoutY="166.0" onAction="#Transfer" prefHeight="52.0" prefWidth="166.0" ripplerFill="#05bf27" style="-fx-background-radius: 10px; -fx-background-color: #078474;" text="Transfer Money" textFill="WHITE">
                      <font>
                         <Font name="DejaVu Sans Condensed Bold" size="17.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="392.0" layoutY="166.0" prefHeight="52.0" prefWidth="155.0" ripplerFill="RED" style="-fx-background-color: #f2f3f8; -fx-background-radius: 20px; -fx-border-color: red; -fx-border-radius: 20px;" text="Link Accounts">
+                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="392.0" layoutY="166.0" prefHeight="52.0" prefWidth="155.0" ripplerFill="RED" style="-fx-background-color: #078474; -fx-background-radius: 10px;" text="Link Accounts" textFill="WHITE">
                      <font>
                         <Font name="Hack Bold" size="15.0" />
                      </font>
                   </JFXButton>
                </children>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color green="0.3764705955982208" blue="0.3921568691730499" />
+                     </color>
+                  </InnerShadow>
+               </effect>
             </Pane>
             <Pane layoutX="67.0" layoutY="386.0" prefHeight="295.0" prefWidth="596.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30px;" styleClass="darkmode" stylesheets="@../styles/Styles.css">
                <children>
@@ -148,18 +157,25 @@
                      </padding>
                   </TableView>
                </children>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color green="0.3764705955982208" blue="0.3921568691730499" />
+                     </color>
+                  </InnerShadow>
+               </effect>
             </Pane>
-            <Label fx:id="time" alignment="CENTER" layoutX="1063.0" layoutY="137.0" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #d1d3de; -fx-background-radius: 10px;" styleClass="TimeColor" stylesheets="@../styles/Styles.css">
+            <Label fx:id="time" alignment="CENTER" layoutX="1063.0" layoutY="137.0" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: #d1d3de; -fx-background-radius: 10px;" styleClass="TimeColor" stylesheets="@../styles/Styles.css" AnchorPane.rightAnchor="20.0">
                <font>
                   <Font name="Cantarell Regular" size="17.0" />
                </font>
             </Label>
-            <Label fx:id="date" alignment="CENTER" layoutX="1052.0" layoutY="171.0" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #d1d3de; -fx-background-radius: 10px;" styleClass="TimeColor" stylesheets="@../styles/Styles.css">
+            <Label fx:id="date" alignment="CENTER" layoutX="1052.0" layoutY="171.0" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #d1d3de; -fx-background-radius: 10px;" styleClass="TimeColor" stylesheets="@../styles/Styles.css" AnchorPane.rightAnchor="20.0">
                <font>
                   <Font name="P052-Bold" size="19.0" />
                </font>
             </Label>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1046.0" layoutY="2.0" onAction="#Setting" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1045.0" layoutY="23.0" onAction="#Setting" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -168,7 +184,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1087.0" layoutY="1.0" onAction="#Contact" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1087.0" layoutY="1.0" onAction="#Contact" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="40.0">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -177,7 +193,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1158.0" layoutY="31.0" prefHeight="29.0" prefWidth="22.0" ripplerFill="RED">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1158.0" layoutY="31.0" prefHeight="29.0" prefWidth="22.0" ripplerFill="RED" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -186,7 +202,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1158.0" onAction="#close" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1158.0" onAction="#close" prefHeight="29.0" prefWidth="37.0" ripplerFill="RED" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="40.0">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -195,7 +211,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1125.0" layoutY="2.0" onAction="#minimize" prefHeight="22.0" prefWidth="29.0" ripplerFill="RED">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1125.0" layoutY="2.0" onAction="#minimize" prefHeight="22.0" prefWidth="29.0" ripplerFill="RED" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="40.0">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -204,7 +220,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <Pane layoutX="691.0" layoutY="240.0" prefHeight="441.0" prefWidth="488.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30px;" styleClass="darkmode" stylesheets="@../styles/Styles.css">
+            <Pane layoutX="691.0" layoutY="240.0" prefHeight="441.0" prefWidth="488.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30px;" styleClass="darkmode" stylesheets="@../styles/Styles.css" AnchorPane.rightAnchor="20.0">
                <children>
                   <Label alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="26.0" prefWidth="155.0" text="All Expenses" wrapText="true">
                      <font>
@@ -253,8 +269,15 @@
                      </children>
                   </Pane>
                </children>
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color green="0.3764705955982208" blue="0.3921568691730499" />
+                     </color>
+                  </InnerShadow>
+               </effect>
             </Pane>
-            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1148.0" layoutY="88.0" onAction="#refresh" prefHeight="29.0" prefWidth="37.0" ripplerFill="#783636">
+            <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="1081.0" layoutY="80.0" onAction="#refresh" prefHeight="29.0" prefWidth="37.0" ripplerFill="#783636" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="80.0">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>

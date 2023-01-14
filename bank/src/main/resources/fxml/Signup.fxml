@@ -2,76 +2,92 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="dashpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black; -fx-background-radius: 40px;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #006064;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.signupController">
    <children>
-      <ImageView cache="true" fitHeight="640.0" fitWidth="360.0" pickOnBounds="true" rotate="180.0" style="-fx-opacity: 0.5;">
-         <image>
-            <Image url="@../Images/download.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="67.0" layoutY="35.0" prefHeight="51.0" prefWidth="234.0" text="Registration Info" textFill="WHITE" underline="true" wrapText="true">
-         <font>
-            <Font name="Quicksand Medium" size="27.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="username" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="36.0" layoutY="105.0" prefHeight="33.0" prefWidth="299.0" promptText="Username" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font>
-      </JFXTextField>
-      <JFXDatePicker fx:id="birthdate" defaultColor="RED" editable="false" layoutX="36.0" layoutY="160.0" prefHeight="33.0" prefWidth="299.0" promptText="Birthdate" showWeekNumbers="true" style="-fx-background-color: #ffff; -fx-alignment: center; -fx-background-radius: 10px;" styleClass="color" stylesheets="@../styles/Styles.css" />
-      <JFXComboBox fx:id="gender" cache="true" focusColor="BLACK" layoutX="36.0" layoutY="214.0" prefHeight="33.0" prefWidth="299.0" promptText="Gender" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: red;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED" />
-      <JFXTextField fx:id="account" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="36.0" layoutY="269.0" prefHeight="33.0" prefWidth="299.0" promptText="Account Number" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="ifsc" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="327.0" prefHeight="33.0" prefWidth="299.0" promptText="IFSC Code" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="email" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="392.0" prefHeight="33.0" prefWidth="299.0" promptText="Email" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font>
-      </JFXTextField>
-      <JFXTextField fx:id="phone" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="450.0" prefHeight="33.0" prefWidth="299.0" promptText="Phone" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font>
-      </JFXTextField>
-      <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="WHITE" labelFloat="true" layoutX="37.0" layoutY="512.0" prefHeight="33.0" prefWidth="299.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 10px; -jfx-focus-color: white;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Georgia Bold" size="18.0" />
-         </font>
-      </JFXPasswordField>
-      <JFXButton alignment="CENTER" buttonType="RAISED" defaultButton="true" layoutX="132.0" layoutY="566.0" onAction="#register" prefHeight="51.0" prefWidth="108.0" ripplerFill="RED" style="-fx-background-color: white; -fx-background-radius: 10px; -fx-border-radius: 10px;" text="Sign Up" textAlignment="CENTER" textFill="RED" underline="true" wrapText="true">
-         <font>
-            <Font name="Lato Semibold" size="21.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="CLOSED_HAND" />
-         </cursor>
-      </JFXButton>
-      <JFXButton alignment="CENTER" buttonType="RAISED" cancelButton="true" contentDisplay="CENTER" layoutX="317.0" layoutY="2.0" onAction="#No" prefHeight="6.0" prefWidth="0.0" ripplerFill="#00a3ff" style="-fx-background-color: white;" wrapText="true">
-         <graphic>
-            <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" smooth="false">
+      <Pane prefHeight="589.0" prefWidth="790.0" style="-fx-background-color: white; -fx-background-radius: 20px;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <ImageView fitHeight="689.0" fitWidth="425.0" pickOnBounds="true">
                <image>
-                  <Image url="@../Images/cancel.png" />
+                  <Image url="@../Images/wave.png" />
                </image>
             </ImageView>
-         </graphic>
-      </JFXButton>
+            <ImageView fitHeight="399.0" fitWidth="447.0" layoutX="97.0" layoutY="290.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../Images/bg.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="213.0" layoutY="63.0" stroke="#1a944d" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeMiterLimit="8.0" strokeType="INSIDE" text="WELCOME TO PERSONAL BANKING">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="35.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="username" focusColor="#0fae3a" labelFloat="true" layoutX="546.0" layoutY="161.0" prefHeight="26.0" prefWidth="294.0" promptText="Enter Username" unFocusColor="#070707">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXComboBox fx:id="gender" focusColor="#0aa426" labelFloat="true" layoutX="544.0" layoutY="220.0" prefHeight="24.0" prefWidth="294.0" promptText="Select Gender" unFocusColor="#030303" />
+            <DatePicker fx:id="birthdate" editable="false" layoutX="544.0" layoutY="267.0" prefHeight="24.0" prefWidth="294.0" promptText="Choose DOB" showWeekNumbers="true" />
+            <JFXTextField fx:id="account" focusColor="#0fae3a" labelFloat="true" layoutX="544.0" layoutY="305.0" prefHeight="26.0" prefWidth="294.0" promptText="Enter Account No." unFocusColor="#070707">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="ifsc" focusColor="#0fae3a" labelFloat="true" layoutX="544.0" layoutY="357.0" prefHeight="26.0" prefWidth="294.0" promptText="Enter IFSC Code" unFocusColor="#070707">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="email" focusColor="#0fae3a" labelFloat="true" layoutX="544.0" layoutY="410.0" prefHeight="26.0" prefWidth="294.0" promptText="Enter Email Address" unFocusColor="#070707">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="phone" focusColor="#0fae3a" labelFloat="true" layoutX="544.0" layoutY="461.0" prefHeight="33.0" prefWidth="294.0" promptText="Enter Phone Number" unFocusColor="#070707">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="password" focusColor="#0fae3a" labelFloat="true" layoutX="545.0" layoutY="519.0" prefHeight="33.0" prefWidth="294.0" promptText="Enter Password" unFocusColor="BLACK">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font></JFXPasswordField>
+            <JFXButton buttonType="RAISED" defaultButton="true" layoutX="605.0" layoutY="600.0" onAction="#signup" ripplerFill="#0fae3a" style="-fx-background-color: #2fd299;" text="SIGNUP" textFill="WHITE">
+               <font>
+                  <Font name="Lato Heavy" size="21.0" />
+               </font>
+            </JFXButton>
+            <Text fill="WHITE" layoutX="250.0" layoutY="142.0" stroke="#199e50" strokeType="OUTSIDE" text="SIGNUP">
+               <font>
+                  <Font name="Lato Heavy" size="54.0" />
+               </font>
+            </Text>
+            <Label fx:id="label" layoutX="532.0" layoutY="111.0" prefHeight="22.0" prefWidth="332.0" textAlignment="CENTER" textFill="#ff0606">
+               <font>
+                  <Font name="Economica" size="19.0" />
+               </font>
+            </Label>
+            <JFXButton alignment="CENTER" buttonType="RAISED" cancelButton="true" contentDisplay="CENTER" layoutX="850.0" layoutY="12.0" onAction="#close" prefHeight="11.0" prefWidth="13.0" ripplerFill="RED" style="-fx-background-color: #12A163;" text="X" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

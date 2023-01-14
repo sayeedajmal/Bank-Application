@@ -3,83 +3,72 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="dashpane" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #006064;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.LoginController">
    <children>
-      <ImageView fitHeight="640.0" fitWidth="360.0" pickOnBounds="true" rotate="-180.0">
-         <image>
-            <Image url="@../Images/download.png" />
-         </image>
-      </ImageView>
-      <JFXTextField fx:id="username" alignment="CENTER" focusColor="BLACK" labelFloat="true" layoutX="47.0" layoutY="234.0" prefHeight="36.0" prefWidth="278.0" promptText="UserName" style="-fx-background-color: #fafafa; -fx-background-radius: 50px;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Fira Code Bold" size="17.0" />
-         </font>
-      </JFXTextField>
-      <JFXPasswordField fx:id="password" alignment="CENTER" focusColor="BLACK" labelFloat="true" layoutX="49.0" layoutY="320.0" prefHeight="36.0" prefWidth="278.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 60px;" styleClass="color" stylesheets="@../styles/Styles.css" unFocusColor="RED">
-         <font>
-            <Font name="Fira Code Bold" size="17.0" />
-         </font>
-      </JFXPasswordField>
-      <JFXButton buttonType="RAISED" defaultButton="true" layoutX="95.0" layoutY="479.0" onAction="#Access" prefHeight="36.0" prefWidth="162.0" ripplerFill="WHITE" style="-fx-alignment: center; -fx-background-radius: 60px; -fx-background-color: #141313; -fx-border-color: green; -fx-border-radius: 60px;" text="Access" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Bitstream Vera Serif Bold" size="24.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="33.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+      <Pane prefHeight="589.0" prefWidth="790.0" style="-fx-background-color: white; -fx-background-radius: 20px;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <ImageView fitHeight="589.0" fitWidth="425.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true">
                <image>
-                  <Image url="@../Images/enter.png" />
+                  <Image url="@../Images/wave.png" />
                </image>
             </ImageView>
-         </graphic>
-      </JFXButton>
-      <Label alignment="CENTER" layoutX="115.0" layoutY="98.0" prefHeight="51.0" prefWidth="142.0" style="-fx-border-radius: 10px 50px 50px 10px; -fx-text-fill: blue; -fx-text-alignment: center;" text="LOG IN" textFill="WHITE" wrapText="true">
-         <font>
-            <Font name="Fira Code SemiBold" size="34.0" />
-         </font>
-         <effect>
-            <Glow level="0.63" />
-         </effect>
-      </Label>
-      <ImageView fitHeight="36.0" fitWidth="33.0" layoutX="3.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/user.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="36.0" fitWidth="33.0" layoutX="3.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/lock.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="84.0" fitWidth="71.0" layoutX="151.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/account.png" />
-         </image>
-      </ImageView>
-      <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="99.0" layoutY="551.0" onAction="#signup" prefHeight="36.0" prefWidth="162.0" ripplerFill="RED" style="-fx-alignment: center;" text="Don't have Account" textFill="WHITE" underline="true" wrapText="true">
-         <font>
-            <Font name="Quicksand Medium" size="15.0" />
-         </font>
-      </JFXButton>
-      <JFXButton alignment="CENTER" buttonType="RAISED" cancelButton="true" contentDisplay="CENTER" layoutX="319.0" layoutY="2.0" onAction="#No" prefHeight="0.0" prefWidth="8.0" ripplerFill="#00a3ff" wrapText="true">
-         <graphic>
-            <ImageView fitHeight="19.0" fitWidth="21.0" pickOnBounds="true" smooth="false">
+            <ImageView fitHeight="399.0" fitWidth="447.0" layoutX="56.0" layoutY="190.0" pickOnBounds="true">
                <image>
-                  <Image url="@../Images/cancel.png" />
+                  <Image url="@../Images/bg.png" />
                </image>
             </ImageView>
-         </graphic>
-      </JFXButton>
-      <Label fx:id="notfound" alignment="CENTER" contentDisplay="CENTER" layoutX="87.0" layoutY="407.0" prefHeight="36.0" prefWidth="186.0" textFill="#5bfff4" wrapText="true">
-         <font>
-            <Font name="Monospaced Bold" size="21.0" />
-         </font>
-      </Label>
+            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="213.0" layoutY="63.0" stroke="#1a944d" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeMiterLimit="8.0" strokeType="INSIDE" text="WELCOME TO PERSONAL BANKING">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="35.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="username" focusColor="#0fae3a" labelFloat="true" layoutX="456.0" layoutY="209.0" prefHeight="26.0" prefWidth="294.0" promptText="Enter Username" unFocusColor="#070707">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="password" focusColor="#0fd333" labelFloat="true" layoutX="456.0" layoutY="269.0" prefHeight="26.0" prefWidth="294.0" promptText="Enter Your Password" unFocusColor="BLACK">
+               <font>
+                  <Font name="Liberation Sans Narrow Bold" size="18.0" />
+               </font></JFXPasswordField>
+            <Text fill="WHITE" layoutX="489.0" layoutY="144.0" stroke="#199e50" strokeType="OUTSIDE" text="LOGIN">
+               <font>
+                  <Font name="Lato Heavy" size="54.0" />
+               </font>
+            </Text>
+            <JFXButton buttonType="RAISED" layoutX="521.0" layoutY="417.0" onAction="#signUp" ripplerFill="#319a08" text="Don't Have Account !" textFill="#006f14">
+               <font>
+                  <Font name="Fira Code Retina" size="11.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="label" layoutX="453.0" layoutY="168.0" prefHeight="25.0" prefWidth="294.0" textAlignment="CENTER" textFill="#f20101">
+               <font>
+                  <Font name="Fira Code Retina Nerd Font Complete Mono" size="18.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="553.0" layoutY="363.0" onAction="#Access" ripplerFill="#0edd23" style="-fx-background-color: #097c16;" text="ACCESS" textFill="WHITE">
+               <font>
+                  <Font name="Fira Code Retina Nerd Font Complete Mono" size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton alignment="CENTER" buttonType="RAISED" cancelButton="true" contentDisplay="CENTER" layoutX="750.0" layoutY="16.0" onAction="#close" prefHeight="11.0" prefWidth="13.0" ripplerFill="RED" style="-fx-background-color: #12A163;" text="X" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

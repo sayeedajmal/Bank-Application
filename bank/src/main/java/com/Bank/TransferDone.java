@@ -196,7 +196,7 @@ public class TransferDone implements Initializable {
 
                             JFXDialogLayout layout = new JFXDialogLayout();
                             layout.setBody(new Label("TransFer Done! 😍"));
-                            JFXAlert<Void> alert = new JFXAlert<>();
+                            JFXAlert alert = new JFXAlert(null);
                             alert.setAnimation(JFXAlertAnimation.CENTER_ANIMATION);
                             alert.setContent(layout);
                             alert.initModality(Modality.APPLICATION_MODAL);

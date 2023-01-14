@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.DashboardController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="549.0" prefWidth="905.0" style="-fx-background-radius: 20px;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Bank.DashboardController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
    </columnConstraints>
@@ -19,7 +20,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="577.0" prefWidth="891.0" style="-fx-background-color: #eeee; -fx-border-color: #0288D1; -fx-border-width: 5px; -fx-border-radius: 30px;">
+      <AnchorPane prefHeight="577.0" prefWidth="891.0" style="-fx-border-color: #006064; -fx-border-width: 5px;">
          <children>
             <ImageView fitHeight="40.0" fitWidth="68.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true">
                <image>
@@ -31,11 +32,6 @@
                   <Font name="Georgia Bold" size="15.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="420.0" layoutY="23.0" prefHeight="33.0" prefWidth="100.0" ripplerFill="RED" text="Banking">
-               <font>
-                  <Font name="DejaVu Serif Condensed Bold Italic" size="17.0" />
-               </font>
-            </JFXButton>
             <Pane layoutX="28.0" layoutY="93.0" prefHeight="427.0" prefWidth="868.0" style="-fx-background-color: #ffffff; -fx-background-radius: 50px 0px 50px 0px;">
                <children>
                   <Label alignment="CENTER" layoutX="9.0" layoutY="16.0" prefHeight="31.0" prefWidth="219.0" text="Saving Account Number:" wrapText="true">
@@ -63,7 +59,7 @@
                         <Font name="Fira Code Regular" size="19.0" />
                      </font>
                   </Label>
-                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="88.0" layoutY="209.0" onAction="#depositebutton" prefHeight="52.0" prefWidth="119.0" ripplerFill="#00ff2f" style="-fx-background-radius: 10px; -fx-background-color: #078474; -fx-border-color: blue; -fx-border-radius: 10px;" text="Deposite" textFill="WHITE">
+                  <JFXButton alignment="CENTER" buttonType="RAISED" layoutX="88.0" layoutY="209.0" onAction="#depositebutton" prefHeight="52.0" prefWidth="119.0" ripplerFill="#00ff2f" style="-fx-background-radius: 10px; -fx-background-color: #078474;" text="Deposite" textFill="WHITE">
                      <font>
                         <Font name="DejaVu Sans Condensed Bold" size="17.0" />
                      </font>
@@ -104,6 +100,11 @@
                   </ImageView>
                </graphic>
             </JFXButton>
+            <Text fill="WHITE" fontSmoothingType="LCD" layoutX="391.0" layoutY="51.0" stroke="#147908" strokeType="OUTSIDE" text="BANKING">
+               <font>
+                  <Font name="LMMonoSlant10-Regular" size="31.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
