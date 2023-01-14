@@ -13,10 +13,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import com.jfoenix.animation.alert.JFXAlertAnimation;
-import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.animation.Animation;
@@ -28,8 +25,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -191,14 +190,12 @@ public class TransferDone implements Initializable {
                                     + " WHERE ACCOUNT =" + temp_Account;
                             preparedStatement = connection.prepareStatement(Query);
                             preparedStatement.executeUpdate(Query);
-                            
+
                             TransferAmmount.setText(null);
 
-                            JFXDialogLayout layout = new JFXDialogLayout();
-                            layout.setBody(new Label("TransFer Done! 😍"));
-                            JFXAlert alert = new JFXAlert(null);
-                            alert.setAnimation(JFXAlertAnimation.CENTER_ANIMATION);
-                            alert.setContent(layout);
+                            Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("Transfer Message");
+                            alert.setContentText("TransFer Done! 😍");
                             alert.initModality(Modality.APPLICATION_MODAL);
                             alert.showAndWait();
                             Thread.sleep(500);
