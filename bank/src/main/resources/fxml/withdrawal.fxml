@@ -22,7 +22,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="506.0" prefWidth="906.0" style="-fx-background-color: #eeee; -fx-border-color: #006064; -fx-border-width: 5px;">
+      <AnchorPane prefHeight="492.0" prefWidth="910.0" style="-fx-background-color: #eeee; -fx-border-color: #006064; -fx-border-width: 5px;">
          <children>
             <ImageView fitHeight="40.0" fitWidth="68.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true">
                <image>
@@ -34,7 +34,7 @@
                   <Font name="Georgia Bold" size="15.0" />
                </font>
             </Label>
-            <Pane layoutX="28.0" layoutY="93.0" prefHeight="392.0" prefWidth="868.0" style="-fx-background-color: #ffffff; -fx-background-radius: 50px 0px 50px 0px;">
+            <Pane layoutX="28.0" layoutY="93.0" prefHeight="320.0" prefWidth="872.0" style="-fx-background-color: #ffffff; -fx-background-radius: 50px 0px 50px 0px;">
                <children>
                   <Label alignment="CENTER" layoutX="12.0" layoutY="16.0" prefHeight="31.0" prefWidth="219.0" text="Saving Account Number:" wrapText="true">
                      <font>

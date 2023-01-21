@@ -68,7 +68,7 @@ public class withdrawal implements Initializable {
                         preparedStatement.executeUpdate(Query);
                         No(event);
                         System.out.println("Yes..Done WithDrawal");
-                        
+
                     } else {
                         System.out.println("Nope");
                         withdrawammount.setText(null);
@@ -121,8 +121,7 @@ public class withdrawal implements Initializable {
             }
             input.close();
         } catch (FileNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("fuck it");
+            System.out.println(e.getLocalizedMessage());
         }
     }
 
