@@ -1,7 +1,6 @@
 package com.Bank;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -237,6 +236,7 @@ public class DashboardController implements Initializable {
         Day.setCycleCount(Animation.INDEFINITE);
         Day.play();
         String lDate = currentDate.toString();
+
         /* <<=============== ----------------------- =================>> */
         /* ObservableList for Adding Informations */
         ObservableList<MiniTransaction> list = FXCollections.observableArrayList(
@@ -284,9 +284,8 @@ public class DashboardController implements Initializable {
                     }
                 }
                 input.close();
-            } catch (FileNotFoundException | SQLException e1) {
-                e1.printStackTrace();
-                System.out.println("fuck it");
+            } catch (Exception e1) {
+                System.out.println(e1.getLocalizedMessage());
             }
         }), new KeyFrame(Duration.seconds(1)));
         FetchingAmmount.setCycleCount(Animation.INDEFINITE);

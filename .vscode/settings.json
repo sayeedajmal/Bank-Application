@@ -2,5 +2,7 @@
     "java.configuration.updateBuildConfiguration": "automatic",
     "maven.view": "flat",
     "editor.fontFamily": "'Fira Code Medium'",
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 16
 }

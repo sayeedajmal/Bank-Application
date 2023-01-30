@@ -55,7 +55,7 @@ public class withdrawal implements Initializable {
                 Scanner input = new Scanner(user);
                 while (input.hasNext()) {
 
-                    String update_ammount = withdrawammount.getText();
+                    String update_ammount = withdrawammount.getText().trim();
                     int change_int = Integer.parseInt(update_ammount);
 
                     if (ammount >= change_int) {
@@ -70,17 +70,15 @@ public class withdrawal implements Initializable {
                         System.out.println("Yes..Done WithDrawal");
 
                     } else {
-                        System.out.println("Nope");
                         withdrawammount.setText(null);
                         notsufficient.setText("Ammount is Not Sufficient for WithDraw!");
-
                     }
                 }
                 input.close();
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getLocalizedMessage();
         }
     }
 

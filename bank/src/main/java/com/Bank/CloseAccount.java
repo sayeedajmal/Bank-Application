@@ -20,7 +20,7 @@ public class CloseAccount implements Initializable {
 
     @FXML
     public void deleteaccount(ActionEvent event) throws InterruptedException {
-        Connection connection;
+        /* Connection connection;
         try {
             connection = DBConnect.Embadded();
             Statement statement = connection.createStatement();
@@ -31,7 +31,7 @@ public class CloseAccount implements Initializable {
         }
         System.out.println("Done! It...");
 
-        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close();
+        ((Stage) (((Button) event.getSource()).getScene().getWindow())).close(); */
     }
 
     @FXML

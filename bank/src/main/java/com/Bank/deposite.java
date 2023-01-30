@@ -1,7 +1,6 @@
 package com.Bank;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -39,7 +38,6 @@ public class deposite implements Initializable {
         user_path += File.separator + "username";
         File user = new File(user_path + ".txt");
         try {
-
             Connection connection = DBConnect.Embadded();
             /* Fetching the Ammount */
             String query = "SELECT * FROM " + uname.toUpperCase();
@@ -70,7 +68,7 @@ public class deposite implements Initializable {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.getLocalizedMessage();
         }
 
     }
@@ -111,9 +109,8 @@ public class deposite implements Initializable {
                 }
             }
             input.close();
-        } catch (FileNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("fuck it");
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
         }
     }
 

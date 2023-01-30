@@ -245,9 +245,8 @@ public class TransferDone implements Initializable {
                 }
             }
             input.close();
-        } catch (FileNotFoundException | SQLException e) {
-            e.printStackTrace();
-            System.out.println("fuck it");
+        } catch (Exception e) {
+            e.getLocalizedMessage();
         }
     }
 
