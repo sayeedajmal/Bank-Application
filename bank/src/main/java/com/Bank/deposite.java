@@ -30,7 +30,6 @@ public class deposite implements Initializable {
     public Label NUMBER = new Label();
     public Label AMMOUNT = new Label();
     public Label IFSC = new Label();
-    Stage window = new Stage();
     String uname;
 
     public void Donebutton(ActionEvent event) throws IOException, InterruptedException {

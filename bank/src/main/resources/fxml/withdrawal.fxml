@@ -91,7 +91,7 @@
                         <Font name="Serif Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="notsufficient" alignment="CENTER" contentDisplay="CENTER" layoutX="285.0" layoutY="358.0" prefHeight="29.0" prefWidth="335.0" textFill="RED" underline="true">
+                  <Label fx:id="notsufficient" alignment="CENTER" contentDisplay="CENTER" layoutX="271.0" layoutY="117.0" prefHeight="29.0" prefWidth="335.0" textFill="RED" underline="true">
                      <font>
                         <Font name="Liberation Serif Bold Italic" size="19.0" />
                      </font>
