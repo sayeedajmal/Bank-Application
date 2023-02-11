@@ -9,3 +9,12 @@
 1. MASTER <===> It Run on Localhost Host Server. Which Includes Mysql Database.
 
 2. Embadded <===> It Run On Embadded Database.
+
+## USE MYSQL DATABASE
+
+- mysql (username="root", password="root")
+- database name (BANK)
+
+## Embadded
+- change Branch to Embadded while pulling this Repository.
+- Run the Appliccation with VS Code
