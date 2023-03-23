@@ -6,13 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch DBConnect",
-            "request": "launch",
-            "mainClass": "com.Bank.DBConnect",
-            "projectName": "BANK"
-        },
-        {
-            "type": "java",
             "name": "Launch LAUNCH",
             "request": "launch",
             "mainClass": "com.Bank.LAUNCH",

@@ -14,9 +14,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
-import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXTextField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -36,16 +36,16 @@ import javafx.stage.StageStyle;
 
 public class FXMLController implements Initializable {
     public AnchorPane dashpane;
-    public JFXTextField username = new JFXTextField();
-    public JFXTextField login_username = new JFXTextField();
-    public JFXDatePicker birthdate = new JFXDatePicker();
+    public TextField username = new TextField();
+    public TextField login_username = new TextField();
+    public DatePicker birthdate = new DatePicker();
     public JFXComboBox<String> gender = new JFXComboBox<>();
-    public JFXTextField email = new JFXTextField();
-    public JFXTextField phone = new JFXTextField();
-    public JFXPasswordField password = new JFXPasswordField();
-    public JFXPasswordField login_password = new JFXPasswordField();
-    public JFXTextField account = new JFXTextField();
-    public JFXTextField ifsc = new JFXTextField();
+    public TextField email = new TextField();
+    public TextField phone = new TextField();
+    public PasswordField password = new PasswordField();
+    public PasswordField login_password = new PasswordField();
+    public TextField account = new TextField();
+    public TextField ifsc = new TextField();
     public Label notfound;
 
     /* THIS SECTION IS FOR GETTING CONNECTION FROM MYSQL SERVER */
