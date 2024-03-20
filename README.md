@@ -1,8 +1,6 @@
 # BANKING APPLICATION FOR WINDOWS AND LINUX
 
-- This is A Banking Application Developed by @SAYEEDAJMAL.
-
-- This Application will run on Localhost Server with the help of Mysql Databvase. And Also Designed for Embadded Database.
+- This Application will run on Localhost Server with the help of Mysql Database. And Also Designed for Embadded Database.
 
 ## BRANCHES
 
